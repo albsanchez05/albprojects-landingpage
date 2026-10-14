@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Database Service
+  tutor-db:
+    image: postgres:16-alpine
+    container_name: tutor-postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-languagedb}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Spring Boot + Thymeleaf Web Application Service
+  tutor-app:
+    build: .
+    container_name: tutor-web-app
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      # Connects to the 'tutor-db' service host defined above
+      SPRING_DATASOURCE_URL: jdbc:postgresql://tutor-db:5432/languagedb
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres_password}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    depends_on:
+      - tutor-db
+
+volumes:
+  postgres_data:
