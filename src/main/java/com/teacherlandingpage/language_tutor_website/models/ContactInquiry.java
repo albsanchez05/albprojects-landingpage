@@ -3,6 +3,7 @@ package com.teacherlandingpage.language_tutor_website.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +36,10 @@ public class ContactInquiry
     private String targetLanguage; // "ENGLISH" OR "SPANISH"
 
     @NotBlank(message = "Please enter your mobile/phone number / Por favor ingresa tu número de teléfono")
+    @Pattern(
+        regexp = "^[0-9+ \\-()]+$",
+        message = "Phone number must contain only digits / El teléfono solo debe contener números"
+    )
     private String phoneNumber;
 
     @NotBlank(message = "Please enter a short message / Por favor ingresa un mensaje corto")
