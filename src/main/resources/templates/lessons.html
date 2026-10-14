@@ -34,7 +34,7 @@
                     <h3 class="card-title h4 text-primary fw-bold" th:text="${pkg.title}">Package Title</h3>
                     <p class="card-text text-muted flex-grow-1" th:text="${pkg.description}">Description</p>
                     <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
-                        <span class="fs-4 fw-bold text-dark" th:text="'$' + ${pkg.hourlyRate} + ${rateSuffix}">$25 / hr</span>
+                        <span class="fs-4 fw-bold text-dark" th:text="'€' + ${pkg.hourlyRate} + ${rateSuffix}">€25 / hr</span>
                         <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-outline-primary fw-semibold" th:text="${contactBtnText}">
                             Contact
                         </a>
