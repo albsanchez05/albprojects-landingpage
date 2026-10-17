@@ -3,56 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle}">Language Lessons</title>
+    <title th:text="${pageTitle}">Language Tutor Platform</title>
+    <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom Theme -->
+    <link rel="stylesheet" th:href="@{/css/wse-style.css}">
 </head>
-<body class="bg-light">
+<body>
 
 <!-- Header / Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg wse-navbar shadow-sm sticky-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/" th:text="${navBack}">← Back</a>
+        <a class="navbar-brand text-white fw-bold" href="/" th:text="${navBack}">← Volver a la selección de idioma</a>
     </div>
 </nav>
 
-<!-- Hero Banner -->
-<div class="bg-primary text-white text-center py-5 mb-5">
-    <div class="container">
-        <h1 class="display-5 fw-bold" th:text="${pageTitle}">Courses</h1>
-        <p class="lead" th:text="${bannerSubtitle}">Course overview</p>
+<!-- 1. LANGUAGE CHOICE BANNER (Forest Green Background) -->
+<header class="wse-hero-banner py-5 shadow-sm">
+    <div class="container text-center px-3">
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold"
+                  th:text="${targetLanguage == 'ENGLISH' ? 'Clases de Inglés Personalizadas' : 'Customized Spanish Lessons'}">
+                Language Course
+            </span>
+        <h1 class="display-5 fw-extrabold mb-3 text-white" th:text="${pageTitle}">Title</h1>
+        <p class="lead text-white-50 mx-auto mb-0" style="max-width: 650px;" th:text="${bannerSubtitle}">Subtitle</p>
     </div>
-</div>
+</header>
 
-<!-- Course Cards Grid -->
-<div class="container mb-5">
-    <h2 class="fw-bold mb-4 text-center" th:text="${packagesHeader}">Available Packages</h2>
+<!-- 2. ABOUT ME / EXPERIENCE SECTION -->
+<section class="py-5">
+    <div class="container px-3">
+        <div class="row align-items-center g-4">
+            <div class="col-md-5 text-center">
+                <div class="p-4 wse-card d-inline-block bg-white shadow-sm">
+                    <!-- Forest Green Teacher Icon -->
+                    <i class="bi bi-person-workspace display-1 text-forest-green"></i>
+                    <h4 class="fw-bold mt-3 mb-1" th:text="${targetLanguage == 'ENGLISH' ? 'Alberto Sánchez' : 'Alberto Sánchez'}">Alberto Sánchez</h4>
+                    <p class="text-muted mb-0" th:text="${targetLanguage == 'ENGLISH' ? 'Profesor de Idiomas & Preparador de Examenes Internacionales' : 'Language Instructor & International Exam Trainer'}">Language Tutor</p>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <span class="wse-badge mb-2 d-inline-block" th:text="${targetLanguage == 'ENGLISH' ? 'Sobre Mí' : 'About Me'}">About Me</span>
+                <h2 class="fw-bold mb-3" th:text="${targetLanguage == 'ENGLISH' ? 'Pasión por la Enseñanza de Idiomas' : 'Passion for Teaching Languages'}">Experience</h2>
+                <p class="text-muted" th:text="${targetLanguage == 'ENGLISH' ?
+                        'Cuento con más de 10 años de experiencia ayudando a profesionales y estudiantes a romper la barrera del idioma. Mi objetivo es darte la seguridad necesaria para expresarte con naturalidad en el mundo real.' :
+                        'With over 10 years of experience teaching students and working professionals, I focus on building natural conversational confidence and clear communication.'}">
+                </p>
+                <ul class="list-unstyled text-secondary">
+                    <!-- Forest Green Checkmarks -->
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Clases 100% personalizadas según tus metas' : '100% customized 1-on-1 lessons'}">Customized lessons</span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Horarios flexibles adaptados a tu agenda' : 'Flexible scheduling for busy professionals'}">Flexible schedule</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <div class="row g-4 justify-content-center">
-        <div class="col-md-6 col-lg-5" th:each="pkg : ${packages}">
-            <div class="card h-100 shadow-sm border-0">
-                <div class="card-body d-flex flex-column">
-                    <h3 class="card-title h4 text-primary fw-bold" th:text="${pkg.title}">Package Title</h3>
-                    <p class="card-text text-muted flex-grow-1" th:text="${pkg.description}">Description</p>
+<!-- 3. TASK-BASED LEARNING METHODOLOGY SECTION -->
+<section class="py-5 wse-section-bg border-top border-bottom">
+    <div class="container px-3">
+        <div class="text-center mb-5">
+            <span class="wse-badge mb-2 d-inline-block" th:text="${targetLanguage == 'ENGLISH' ? 'Nuestra Metodología' : 'Our Methodology'}">Methodology</span>
+            <h2 class="fw-bold" th:text="${targetLanguage == 'ENGLISH' ? 'Aprender Haciendo (Task-Based Learning)' : 'Learning by Doing (Task-Based Learning)'}">Methodology</h2>
+            <p class="text-muted mx-auto" style="max-width: 700px;" th:text="${targetLanguage == 'ENGLISH' ?
+                    'Olvídate de memorizar gramática abstracta. Nuestro método se enfoca en comunicarte de manera efectiva en situaciones reales desde el primer día.' :
+                    'Forget endless grammar drills. Our practical approach focuses on real-world communication skills from day one.'}">
+            </p>
+        </div>
+
+        <!-- TBL 3-Step Process with Forest Green Icons -->
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 text-center">
+                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-compass-fill"></i></div>
+                    <h4 class="fw-bold mb-2" th:text="${targetLanguage == 'ENGLISH' ? '1. Preparación' : '1. Pre-Task'}">1. Preparation</h4>
+                    <p class="text-muted mb-0" th:text="${targetLanguage == 'ENGLISH' ?
+                            'Activamos el vocabulario y las frases clave para una situación real (viajes, reuniones, entrevistas) sin presión.' :
+                            'We activate key vocabulary and context for real scenarios (job interviews, travel, meetings) in a relaxed environment.'}">
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 text-center">
+                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-chat-quote-fill"></i></div>
+                    <h4 class="fw-bold mb-2" th:text="${targetLanguage == 'ENGLISH' ? '2. Práctica Real' : '2. Task Cycle'}">2. Real Practice</h4>
+                    <p class="text-muted mb-0" th:text="${targetLanguage == 'ENGLISH' ?
+                            'Pones a prueba tu fluidez mediante roleplays interactivos y resolución de problemas prácticos con feedback personalizado.' :
+                            'You apply your skills through interactive roleplays and practical problem-solving with tailored coaching.'}">
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 text-center">
+                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h4 class="fw-bold mb-2" th:text="${targetLanguage == 'ENGLISH' ? '3. Consolidación' : '3. Post-Task'}">3. Consolidation</h4>
+                    <p class="text-muted mb-0" th:text="${targetLanguage == 'ENGLISH' ?
+                            'Refinamos puntos gramaticales concretos, corregimos detalles de pronunciación y consolidamos tus avances.' :
+                            'We review key grammar points, refine pronunciation, and solidify what you learned for lasting confidence.'}">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. PRICING & PACKAGES SECTION -->
+<section class="py-5 border-bottom">
+    <div class="container px-3">
+        <div class="text-center mb-5">
+            <span class="wse-badge mb-2 d-inline-block" th:text="${targetLanguage == 'ENGLISH' ? 'Planes y Precios' : 'Plans & Pricing'}">Pricing</span>
+            <h2 class="fw-bold" th:text="${packagesHeader}">Available Packages</h2>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-5" th:each="pkg : ${packages}">
+                <div class="wse-card h-100 p-4 d-flex flex-column">
+                    <h3 class="h4 fw-bold text-dark mb-2" th:text="${pkg.title}">Package Title</h3>
+                    <p class="text-muted flex-grow-1" th:text="${pkg.description}">Description</p>
                     <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
-                        <span class="fs-4 fw-bold text-dark" th:text="'€' + ${pkg.hourlyRate} + ${rateSuffix}">€25 / hr</span>
-                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-outline-primary fw-semibold" th:text="${contactBtnText}">
-                            Contact
-                        </a>
+                        <!-- Forest Green Price Text -->
+                        <span class="fs-3 fw-extrabold text-forest-green" th:text="'€' + ${pkg.hourlyRate} + ${rateSuffix}">$25 / hr</span>
+                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-outline btn-sm" th:text="${contactBtnText}">Book</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- General CTA Section -->
-    <div class="text-center mt-5 pt-4">
-        <h3 class="fw-bold" th:text="${ctaTitle}">Ready to start learning?</h3>
-        <p class="text-muted" th:text="${ctaSubtitle}">Get in touch to discuss schedule availability.</p>
-        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-success btn-lg px-4 py-2 shadow-sm fw-bold" th:text="${ctaBtnText}">
-            Contact for Availability
-        </a>
+<!-- 5. CONTACT & INQUIRY FORM SECTION -->
+<section id="contact" class="py-5 wse-section-bg">
+    <div class="container px-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="wse-card p-4 p-md-5">
+                    <h2 class="fw-bold text-center mb-3" th:text="${targetLanguage == 'ENGLISH' ? 'Contacto y Disponibilidad' : 'Contact for Availability'}">Contact</h2>
+                    <p class="text-center text-muted mb-4" th:text="${targetLanguage == 'ENGLISH' ? 'Consulta horarios disponibles o solicita un plan personalizado.' : 'Inquire about schedule availability or customized lesson plans.'}">Subtitle</p>
+
+                    <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary w-100 shadow-sm text-center">
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Ir al Formulario de Contacto' : 'Open Inquiry Form'}">Open Inquiry Form</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
 </body>
 </html>

@@ -26,13 +26,13 @@ public class HomeController
     public String learnEnglish( Model model )
     {
         model.addAttribute("packages", lessonPackageRepository.findByTargetLanguage("ENGLISH"));
-        model.addAttribute("pageTitle", "Aprende Inglés - Cursos y Tarifas");
+        model.addAttribute("pageTitle", "Cursos, Metodologia, y Tarifas");
         model.addAttribute("bannerSubtitle", "Clases personalizadas adaptadas a tus objetivos profesionales y personales.");
         model.addAttribute("navBack", "← Volver a la selección de idioma");
         model.addAttribute("packagesHeader", "Planes de Clases Disponibles");
         model.addAttribute("rateSuffix", " / hora");
         model.addAttribute("contactBtnText", "Consultar disponibilidad");
-        model.addAttribute("ctaTitle", "¿Listo para empezar a aprender?");
+        model.addAttribute("ctaTitle", "¿Listo/a para empezar a aprender?");
         model.addAttribute("ctaSubtitle", "Ponte en contacto para consultar horarios y personalizar tu plan de clases.");
         model.addAttribute("ctaBtnText", "Consultar disponibilidad de clases");
         model.addAttribute("targetLanguage", "ENGLISH");
@@ -43,8 +43,8 @@ public class HomeController
     public String learnSpanish( Model model )
     {
         model.addAttribute("packages", lessonPackageRepository.findByTargetLanguage("SPANISH"));
-        model.addAttribute("pageTitle", "Learn Spanish - Courses & Rates");
-        model.addAttribute("bannerSubtitle", "Tailored 1-on-1 language coaching designed for fast conversational fluency.");
+        model.addAttribute("pageTitle", "Courses, Methodology, and Rates");
+        model.addAttribute("bannerSubtitle", "Costumized Spanish lessons designed for fast conversational fluency.");
         model.addAttribute("navBack", "← Back to Language Selection");
         model.addAttribute("packagesHeader", "Available Packages");
         model.addAttribute("rateSuffix", " / hr");

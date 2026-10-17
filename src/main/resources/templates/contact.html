@@ -3,83 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${formTitle}">Contact & Lesson Availability</title>
+    <title>Contact & Booking | Language Tutor</title>
+    <!-- Bootstrap 5 & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Woodland Whisper Theme -->
+    <link rel="stylesheet" th:href="@{/css/wse-style.css}">
 </head>
-<body class="bg-light">
+<body class="wse-section-bg py-4">
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar wse-navbar shadow-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" th:href="@{${isEnglishCourse} ? '/learn-english' : '/learn-spanish'}" th:text="${navBack}">← Back</a>
+        <a class="navbar-brand text-white fw-bold fs-6"
+           th:href="${targetLanguage == 'ENGLISH' ? '/learn-english' : '/learn-spanish'}">
+            <i class="bi bi-arrow-left me-1"></i>
+            <span th:text="${targetLanguage == 'ENGLISH' ? 'Volver a Clases de Inglés' : 'Back to Spanish Courses'}">Back</span>
+        </a>
     </div>
 </nav>
 
-<div class="container py-5">
+<div class="container py-5 mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
+        <div class="col-12 col-md-8 col-lg-6">
 
-            <!-- Success Alert Banner -->
-            <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show shadow-sm mb-4" role="alert">
-                <span th:text="${successMessage}">Success message</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-                    <h2 class="card-title fw-bold text-center text-primary mb-3" th:text="${formTitle}">Contact Title</h2>
-                    <p class="text-center text-muted mb-4" th:text="${formSubtitle}">Form Subtitle</p>
-
-                    <form th:action="@{/contact}" th:object="${inquiry}" method="post">
-
-                        <!-- Student Name -->
-                        <div class="mb-3">
-                            <label for="studentName" class="form-label fw-semibold" th:text="${labelName}">Your Name</label>
-                            <input type="text" id="studentName" th:field="*{studentName}"
-                                   class="form-control" th:classappend="${#fields.hasErrors('studentName')} ? 'is-invalid'"
-                                   th:placeholder="${placeholderName}">
-                            <div class="invalid-feedback" th:errors="*{studentName}">Name error</div>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="mb-3">
-                            <label for="email" class="form-label fw-semibold" th:text="${labelEmail}">Email Address</label>
-                            <input type="email" id="email" th:field="*{email}"
-                                   class="form-control" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'"
-                                   th:placeholder="${placeholderEmail}">
-                            <div class="invalid-feedback" th:errors="*{email}">Email error</div>
-                        </div>
-
-                        <!-- Phone Number -->
-                        <div class="mb-3">
-                            <label for="phoneNumber" class="form-label fw-semibold" th:text="${labelPhone}">Mobile / Phone Number</label>
-                            <input type="text" id="phoneNumber" th:field="*{phoneNumber}"
-                                   class="form-control" th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
-                                   th:placeholder="${placeholderPhone}">
-                            <div class="invalid-feedback" th:errors="*{phoneNumber}">Phone error</div>
-                        </div>
-
-                        <!-- Target Language -->
-                        <div class="mb-3">
-                            <label for="targetLanguage" class="form-label fw-semibold" th:text="${labelLanguage}">Language You Want to Learn</label>
-                            <select id="targetLanguage" th:field="*{targetLanguage}" class="form-select">
-                                <option value="ENGLISH">English (Inglés)</option>
-                                <option value="SPANISH">Spanish (Español)</option>
-                            </select>
-                        </div>
-
-                        <!-- Message -->
-                        <div class="mb-4">
-                            <label for="message" class="form-label fw-semibold" th:text="${labelMessage}">Your Message / Goals</label>
-                            <textarea id="message" th:field="*{message}" rows="4"
-                                      class="form-control" th:classappend="${#fields.hasErrors('message')} ? 'is-invalid'"
-                                      th:placeholder="${placeholderMessage}"></textarea>
-                            <div class="invalid-feedback" th:errors="*{message}">Message error</div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm fw-bold" th:text="${submitBtnText}">Send Inquiry</button>
-                    </form>
+            <div class="wse-card p-4 p-md-5 shadow-sm">
+                <div class="text-center mb-4">
+                    <div class="fs-1 text-forest-green mb-2"><i class="bi bi-envelope-paper-heart-fill"></i></div>
+                    <h1 class="h3 fw-bold text-woodland-dark"
+                        th:text="${targetLanguage == 'ENGLISH' ? 'Cuentame sobre ti' : 'Tell me about yourself'}">Contact</h1>
+                    <p class="text-muted"
+                       th:text="${targetLanguage == 'ENGLISH' ? 'Completa tus datos y te responderé en menos de 24 horas.' : 'Fill in your details and I will get back to you within 24 hours.'}">Subtitle</p>
                 </div>
+
+                <!-- Success Alert Banner -->
+                <div th:if="${successMessage}" class="alert alert-success border-0 shadow-sm mb-4 text-center">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <span th:text="${successMessage}">Message sent successfully!</span>
+                </div>
+
+                <!-- Inquiry Form -->
+                <form th:action="@{/contact}" th:object="${inquiry}" method="post">
+
+                    <input type="hidden" th:field="*{targetLanguage}" />
+
+                    <!-- Student Name -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-woodland-dark"
+                               th:text="${targetLanguage == 'ENGLISH' ? 'Nombre completo' : 'Full Name'}">Name</label>
+                        <input type="text" th:field="*{studentName}" class="form-control rounded-3"
+                               th:classappend="${#fields.hasErrors('studentName')} ? 'is-invalid'" placeholder="Jane Doe">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}">Invalid Name</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-woodland-dark"
+                               th:text="${targetLanguage == 'ENGLISH' ? 'Correo electrónico' : 'Email Address'}">Email</label>
+                        <input type="email" th:field="*{email}" class="form-control rounded-3"
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'" placeholder="jane@example.com">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid Email</div>
+                    </div>
+
+                    <!-- Phone Number (With Numeric Validation Error Display) -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-woodland-dark"
+                               th:text="${targetLanguage == 'ENGLISH' ? 'Teléfono móvil' : 'Mobile / Phone Number'}">Phone</label>
+                        <input type="text" th:field="*{phoneNumber}" class="form-control rounded-3"
+                               th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'" placeholder="+34 600 123 456">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Invalid Phone</div>
+                    </div>
+
+                    <!-- Message / Goals -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-woodland-dark"
+                               th:text="${targetLanguage == 'ENGLISH' ? 'Cuéntame tus objetivos o disponibilidad' : 'Tell me about your learning goals'}">Message</label>
+                        <textarea th:field="*{message}" class="form-control rounded-3" rows="4"
+                                  th:classappend="${#fields.hasErrors('message')} ? 'is-invalid'"
+                                  th:placeholder="${targetLanguage == 'ENGLISH' ?
+                                  'Quiero mejorar mi fluidez conversacional para mi trabajo...' :
+                                  'I want to improve my conversational fluency for work and travel...'}"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Invalid Message</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-wse-primary w-100 shadow-sm">
+                        <i class="bi bi-send-fill me-2"></i>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Enviar Solicitud' : 'Submit Inquiry'}">Submit</span>
+                    </button>
+                </form>
+
             </div>
 
         </div>

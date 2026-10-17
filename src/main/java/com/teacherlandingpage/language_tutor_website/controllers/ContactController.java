@@ -10,34 +10,36 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class ContactController
-{
+public class ContactController {
+
     private final ContactInquiryRepository contactInquiryRepository;
 
-    public ContactController(ContactInquiryRepository contactInquiryRepository)
-    {
+    public ContactController(ContactInquiryRepository contactInquiryRepository) {
         this.contactInquiryRepository = contactInquiryRepository;
     }
 
     @GetMapping("/contact")
-    public String showContactForm( @RequestParam( required = false, defaultValue = "ENGLISH" ) String lang, Model model )
-    {
-        boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase( lang );
+    public String showContactForm(@RequestParam(name = "lang", required = false, defaultValue = "ENGLISH") String lang, Model model) {
+        // Normalize language parameter safely
+        String targetLang = (lang != null && lang.equalsIgnoreCase("SPANISH")) ? "SPANISH" : "ENGLISH";
+        boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase(targetLang);
 
-        if ( !model.containsAttribute( "inquiry" ) )
-        {
+        if (!model.containsAttribute("inquiry")) {
             ContactInquiry inquiry = new ContactInquiry();
-            inquiry.setTargetLanguage( isEnglishCourse ? "ENGLISH" : "SPANISH" );
-            model.addAttribute( "inquiry", inquiry );
+            inquiry.setTargetLanguage(targetLang);
+            model.addAttribute("inquiry", inquiry);
         }
 
-        // Localized UI Labels based on target course language
+        // Add both targetLanguage and isEnglishCourse so all HTML template checks work
+        model.addAttribute("targetLanguage", targetLang);
         model.addAttribute("isEnglishCourse", isEnglishCourse);
+
+        // Localized UI Labels based on target course language
         model.addAttribute("navBack", isEnglishCourse ? "← Volver a Ver Clases" : "← Back to Lessons");
         model.addAttribute("formTitle", isEnglishCourse ? "Contacto y Disponibilidad de Clases" : "Contact & Lesson Availability");
         model.addAttribute("formSubtitle", isEnglishCourse ?
-            "Rellena el siguiente formulario para consultar la disponibilidad de horarios o personalizar tu plan de clases." :
-            "Fill out the form below to inquire about schedule availability or customized lesson plans.");
+                "Rellena el siguiente formulario para consultar la disponibilidad de horarios o personalizar tu plan de clases." :
+                "Fill out the form below to inquire about schedule availability or customized lesson plans.");
         model.addAttribute("labelName", isEnglishCourse ? "Tu Nombre" : "Your Name");
         model.addAttribute("labelEmail", isEnglishCourse ? "Correo Electrónico" : "Email Address");
         model.addAttribute("labelPhone", isEnglishCourse ? "Número de Teléfono / Móvil" : "Mobile / Phone Number");
@@ -46,8 +48,8 @@ public class ContactController
         model.addAttribute("placeholderName", isEnglishCourse ? "ej. Juan Pérez" : "e.g. Jane Doe");
         model.addAttribute("placeholderPhone", isEnglishCourse ? "ej. +34 600 000 000" : "e.g. +1 555 123 4567");
         model.addAttribute("placeholderMessage", isEnglishCourse ?
-            "Cuéntame un poco sobre tu nivel actual, objetivos y disponibilidad de horarios..." :
-            "Tell me a bit about your current level, goals, and preferred learning schedule...");
+                "Cuéntame un poco sobre tu nivel actual, objetivos y disponibilidad de horarios..." :
+                "Tell me a bit about your current level, goals, and preferred learning schedule...");
         model.addAttribute("submitBtnText", isEnglishCourse ? "Enviar Consulta" : "Send Inquiry");
 
         return "contact";
@@ -55,26 +57,27 @@ public class ContactController
 
     @PostMapping("/contact")
     public String processContactForm(
-        @Valid @ModelAttribute("inquiry") ContactInquiry inquiry,
-        BindingResult bindingResult,
-        RedirectAttributes redirectAttributes,
-        Model model
-    )
-    {
-        if ( bindingResult.hasErrors() )
-        {
-            return showContactForm( inquiry.getTargetLanguage(), model );
+            @Valid @ModelAttribute("inquiry") ContactInquiry inquiry,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model
+    ) {
+        // Fallback to ENGLISH if targetLanguage is null
+        String targetLang = (inquiry.getTargetLanguage() != null && inquiry.getTargetLanguage().equalsIgnoreCase("SPANISH")) ? "SPANISH" : "ENGLISH";
+        inquiry.setTargetLanguage(targetLang);
+
+        if (bindingResult.hasErrors()) {
+            return showContactForm(targetLang, model);
         }
 
-        contactInquiryRepository.save( inquiry );
+        contactInquiryRepository.save(inquiry);
 
-        boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase( inquiry.getTargetLanguage() );
-
+        boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase(targetLang);
         String successMessage = isEnglishCourse ?
-            "¡Gracias! Tu mensaje ha sido enviado exitosamente. Me pondré en contacto contigo pronto." :
-            "Thank you! Your message has been sent successfully. I will get back to you shortly.";
-        redirectAttributes.addFlashAttribute( "successMessage", successMessage );
+                "¡Gracias! Tu mensaje ha sido enviado exitosamente. Me pondré en contacto contigo pronto." :
+                "Thank you! Your message has been sent successfully. I will get back to you shortly.";
+        redirectAttributes.addFlashAttribute("successMessage", successMessage);
 
-        return "redirect:/contact?lang=" + inquiry.getTargetLanguage();
+        return "redirect:/contact?lang=" + targetLang;
     }
 }

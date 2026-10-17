@@ -1,0 +1,125 @@
+/* Woodland Whisper & Forest Green Theme */
+:root {
+    --wse-woodland-dark: #2F4F4F;      /* Woodland Whisper Dark Slate / Deep Green */
+    --wse-woodland-deeper: #1C352D;    /* Darker Accent */
+    --wse-forest-green: #2D6A4F;       /* Primary Forest Green */
+    --wse-forest-green-dark: #1B4332;  /* Darker Forest Green */
+    --wse-light-bg: #F4F9F5;
+    --wse-card-border: #E2EFE6;
+    --wse-text-muted: #4A5D55;
+}
+
+body {
+    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--wse-woodland-dark);
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Typography & Headers - All Navy replaced with Woodland Dark (#2F4F4F) */
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    color: var(--wse-woodland-dark);
+    font-weight: 800;
+}
+
+/* Forest Green & Woodland Utilities */
+.text-forest-green {
+    color: var(--wse-forest-green) !important;
+}
+
+.text-woodland-dark {
+    color: var(--wse-woodland-dark) !important;
+}
+
+.bg-forest-green {
+    background-color: var(--wse-forest-green) !important;
+}
+
+/* Navigation Bar - Changed from Navy to Woodland Dark (#2F4F4F) */
+.wse-navbar {
+    background-color: var(--wse-woodland-dark) !important;
+    padding: 0.8rem 1rem;
+}
+
+/* Forest Green Hero Banner */
+.wse-hero-banner {
+    background-color: var(--wse-forest-green);
+    color: #ffffff !important;
+}
+
+.wse-hero-banner h1, .wse-hero-banner p {
+    color: #ffffff !important;
+}
+
+/* Custom Badges & Buttons */
+.wse-badge {
+    background-color: rgba(47, 79, 79, 0.12);
+    color: var(--wse-woodland-dark);
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 6px 16px;
+}
+
+.btn-wse-primary {
+    background-color: var(--wse-forest-green);
+    border: 2px solid var(--wse-forest-green);
+    color: #ffffff !important;
+    border-radius: 50px;
+    font-weight: 800;
+    padding: 12px 32px;
+    transition: all 0.3s ease;
+}
+
+.btn-wse-primary:hover, .btn-wse-primary:focus {
+    background-color: var(--wse-forest-green-dark);
+    border-color: var(--wse-forest-green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 106, 79, 0.3);
+}
+
+.btn-wse-outline {
+    background-color: transparent;
+    border: 2px solid var(--wse-forest-green);
+    color: var(--wse-forest-green) !important;
+    border-radius: 50px;
+    font-weight: 800;
+    padding: 10px 28px;
+    transition: all 0.3s ease;
+}
+
+.btn-wse-outline:hover {
+    background-color: var(--wse-forest-green);
+    color: #ffffff !important;
+}
+
+/* Cards and Layout */
+.wse-section-bg {
+    background-color: var(--wse-light-bg);
+}
+
+.wse-card {
+    background-color: #ffffff;
+    border: 1px solid var(--wse-card-border);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(47, 79, 79, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wse-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(47, 79, 79, 0.12);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767.98px) {
+    h1.display-5 { font-size: 2.1rem; }
+    h2 { font-size: 1.6rem; }
+    .btn-wse-primary, .btn-wse-outline {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.bg-woodland-dark {
+    background-color: var(--wse-woodland-dark) !important;
+}
