@@ -22,6 +22,21 @@
         .split-panel-english {
             background-color: var(--wse-light-bg);
         }
+
+        /* Country Flag Badge Styling */
+        .flag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(47, 79, 79, 0.08);
+            border: 1px solid rgba(47, 79, 79, 0.15);
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--wse-woodland-dark);
+        }
+
         @media (max-width: 767.98px) {
             .split-panel-spanish {
                 border-right: none;
@@ -36,14 +51,20 @@
 
     <!-- LEFT HALF: 100% SPANISH (Aprender Inglés) -->
     <div class="col-12 col-md-6 split-panel-spanish d-flex flex-column justify-content-center align-items-center p-4 p-lg-5 text-center">
-        <div style="max-width: 480px;">
+        <div style="max-width: 500px;">
             <span class="wse-badge mb-3 d-inline-block">Cursos de Inglés</span>
-            <div class="fs-1 text-forest-green mb-3">
-                <i class="bi bi-globe-americas"></i>
+
+            <!-- LEFT PANEL: English-Speaking Country Flags -->
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
+                <span class="flag-circle" title="Estados Unidos">🇺🇸</span>
+                <span class="flag-circle" title="Reino Unido">🇬🇧</span>
+                <span class="flag-circle" title="Canadá">🇨🇦</span>
+                <span class="flag-circle" title="Australia">🇦🇺</span>
             </div>
+
             <h1 class="display-6 fw-bold text-woodland-dark mb-3">¿Quieres aprender inglés?</h1>
             <p class="text-muted fs-5 mb-4">
-                Clases de inglés 100% personalizadas para hispanohablantes. Domina la conversación, supera entrevistas laborales y gana fluidez profesional.
+                Clases de inglés 100% personalizadas para hispanohablantes. Domina la conversación, supera entrevistas laborales y gana fluidez profesional con el método Task-Based Learning.
             </p>
             <a href="/learn-english" class="btn btn-wse-primary w-100 shadow-sm py-3 fs-5">
                 Ver Clases de Inglés <i class="bi bi-arrow-right ms-2"></i>
@@ -53,14 +74,20 @@
 
     <!-- RIGHT HALF: 100% ENGLISH (Learn Spanish) -->
     <div class="col-12 col-md-6 split-panel-english d-flex flex-column justify-content-center align-items-center p-4 p-lg-5 text-center">
-        <div style="max-width: 480px;">
+        <div style="max-width: 500px;">
             <span class="wse-badge mb-3 d-inline-block">Spanish Courses</span>
-            <div class="fs-1 text-forest-green mb-3">
-                <i class="bi bi-chat-heart-fill"></i>
+
+            <!-- RIGHT PANEL: Spanish-Speaking Country Flags -->
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-3">
+                <span class="flag-circle" title="España">🇪🇸</span>
+                <span class="flag-circle" title="México">🇲🇽</span>
+                <span class="flag-circle" title="Argentina">🇦🇷</span>
+                <span class="flag-circle" title="Colombia">🇨🇴</span>
             </div>
+
             <h1 class="display-6 fw-bold text-woodland-dark mb-3">Do you want to learn Spanish?</h1>
             <p class="text-muted fs-5 mb-4">
-                100% personalized Spanish lessons for English speakers. Build real-world conversational confidence and practical language skills
+                Tailored 1-on-1 Spanish coaching for English speakers. Build real-world conversational confidence and practical language skills with Task-Based Learning.
             </p>
             <a href="/learn-spanish" class="btn btn-wse-primary w-100 shadow-sm py-3 fs-5">
                 View Spanish Courses <i class="bi bi-arrow-right ms-2"></i>

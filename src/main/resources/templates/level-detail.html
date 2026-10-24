@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEnglishCourse ? 'Plan de Estudios por Nivel' : 'Course Level Curriculum'}">Level Detail</title>
+    <!-- Bootstrap 5 & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Woodland Whisper Theme -->
+    <link rel="stylesheet" th:href="@{/css/wse-style.css}">
+</head>
+<body class="wse-section-bg py-4">
+
+<!-- Header / Navbar -->
+<nav class="navbar navbar-expand-lg wse-navbar shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand text-white fw-bold fs-6"
+           th:href="${isEnglishCourse ? '/learn-english' : '/learn-spanish'}">
+            <i class="bi bi-arrow-left me-1"></i>
+            <span th:text="${navBack}">Volver a Clases</span>
+        </a>
+    </div>
+</nav>
+
+<!-- ========================================== -->
+<!-- 1. BÁSICO (CEFR A1 - A2) | METÁFORA: SEMILLA 🌱 -->
+<!-- ========================================== -->
+<div th:if="${levelCode == 'basico'}">
+    <header class="wse-hero-banner py-5 text-center shadow-sm">
+        <div class="container px-3">
+            <div class="display-3 mb-2">🌱</div>
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold">
+                    <span th:text="${isEnglishCourse ? 'Etapa 1: La Semilla (MCERL A1 - A2)' : 'Stage 1: The Seed (CEFR A1 - A2)'}">Stage 1: Seed</span>
+                </span>
+            <h1 class="display-5 fw-extrabold text-white mb-3"
+                th:text="${isEnglishCourse ? 'Nivel Básico: Plantando tus Cimientos' : 'Basic Level: Planting Your Foundations'}">Basic Level</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 700px;"
+               th:text="${isEnglishCourse ?
+                       'Como una semilla que empieza a germinar, en este nivel echarás raíces sólidas aprendiendo expresiones cotidianas y supervivencia lingüística.' :
+                       'Like a seed starting to sprout, in this level you will establish strong roots by mastering daily expressions and core survival language.'}">
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5 px-3">
+        <!-- PISTA 1: ESPAÑOL (Para hispanohablantes aprendiendo Inglés) -->
+        <div th:if="${isEnglishCourse}" class="row g-4">
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-sprout"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">A1 Principiante (Acreditación KET Prep)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Gramática:</strong> Presente simple, verbos auxiliares (be, do, have), artículos y pronombres personales.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulario:</strong> Saludos, familia, compras, números, días, meses y clima.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Práctica TBL:</strong> Intercambios sencillos en tiendas, pedir comida en restaurantes y presentarse con soltura.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-compass-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">A2 Elemental (Acreditación Cambridge KET)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Gramática:</strong> Pasado simple, futuro con 'going to', imperativo y comparativos.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulario:</strong> Viajes, transporte, reserva de hoteles y descripción del entorno.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Práctica TBL:</strong> Roleplay de itinerarios de viaje, solución de imprevistos turísticos y correos sencillos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PISTA 2: ENGLISH (For English speakers learning Spanish) -->
+        <div th:if="${!isEnglishCourse}" class="row g-4">
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-sprout"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">A1 Beginner (DELE A1 Standards)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Grammar:</strong> Present Indicative, verb 'gustar', articles, direct object pronouns, and location adverbs.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulary:</strong> Personal details, family, food, daily routines, clothing, and house descriptions.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>TBL Tasks:</strong> Ordering tapas, asking for directions, and introducing yourself in a social setting.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-compass-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">A2 Elementary (DELE A2 Standards)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Grammar:</strong> Pretérito Perfecto vs. Indefinido, 'Ir a' + Infinitive, and Ser vs. Estar.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulary:</strong> Travel destinations, culinary recipes, health & symptoms, and city facilities.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>TBL Tasks:</strong> Booking accommodation, describing past vacations, and visiting a local market.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ========================================== -->
+<!-- 2. INTERMEDIO (CEFR B1 - B2) | METÁFORA: BROTE 🪴 -->
+<!-- ========================================== -->
+<div th:if="${levelCode == 'intermedio'}">
+    <header class="wse-hero-banner py-5 text-center shadow-sm">
+        <div class="container px-3">
+            <div class="display-3 mb-2">🪴</div>
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold">
+                    <span th:text="${isEnglishCourse ? 'Etapa 2: El Brote (MCERL B1 - B2)' : 'Stage 2: The Sprout (CEFR B1 - B2)'}">Stage 2: Sprout</span>
+                </span>
+            <h1 class="display-5 fw-extrabold text-white mb-3"
+                th:text="${isEnglishCourse ? 'Nivel Intermedio: Germinando la Autonomía' : 'Intermediate Level: Sprouting Independence'}">Intermediate Level</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 700px;"
+               th:text="${isEnglishCourse ?
+                       'Tu fluidez empieza a florecer. Adquieres la independencia necesaria para desenvolverte en viajes, trabajo y debates.' :
+                       'Your fluency begins to bloom. Gain the independence required to navigate travel, professional settings, and lively discussions.'}">
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5 px-3">
+        <!-- PISTA 1: ESPAÑOL (Aprender Inglés) -->
+        <div th:if="${isEnglishCourse}" class="row g-4">
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-chat-text-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">B1 Intermedio (PET / Cambridge B1)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Gramática:</strong> Tiempos perfectos, voz pasiva básica, condicionales 1 y 2, y verbos modales.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulario:</strong> Ámbito laboral, educación, aficiones, proyectos y expresión de opiniones.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Práctica TBL:</strong> Entrevistas laborales iniciales, redacción de emails profesionales y debates de opinión.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-briefcase-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">B2 Intermedio Alto (FCE / First Certificate)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Gramática:</strong> Tercer condicional, estilo indirecto (reported speech), inversion y oraciones relativas.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulario:</strong> Medios de comunicación, tecnología, problemas sociales y argumentación profesional.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Práctica TBL:</strong> Presentaciones de negocios, negociación de contratos y análisis de noticias.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PISTA 2: ENGLISH (Learn Spanish) -->
+        <div th:if="${!isEnglishCourse}" class="row g-4">
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-chat-text-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">B1 Intermediate (DELE B1)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Grammar:</strong> Imperfect Indicative, Present Subjunctive, Simple Conditional, and verbal periphrasis.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulary:</strong> Work environment, life milestones, social customs, emotions, and personal letters.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>TBL Tasks:</strong> Job interview simulations, expressing hopes/ambitions, and writing formal emails.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="wse-card p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-briefcase-fill"></i></span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-0">B2 Upper-Intermediate (DELE B2)</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Grammar:</strong> Imperfect & Pluperfect Subjunctive, Compound Conditional, and Passive Voice.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>Vocabulary:</strong> Mass media, environment, technology, political history, and personal relationships.</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-forest-green me-2"></i> <strong>TBL Tasks:</strong> Debating pros and cons, presenting a project report, and active group discussions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ========================================== -->
+<!-- 3. AVANZADO (CEFR C1) | METÁFORA: PLANTA 🌿 -->
+<!-- ========================================== -->
+<div th:if="${levelCode == 'avanzado'}">
+    <header class="wse-hero-banner py-5 text-center shadow-sm">
+        <div class="container px-3">
+            <div class="display-3 mb-2">🌿</div>
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold">
+                    <span th:text="${isEnglishCourse ? 'Etapa 3: La Planta Robusta (MCERL C1)' : 'Stage 3: The Strong Plant (CEFR C1)'}">Stage 3: Plant</span>
+                </span>
+            <h1 class="display-5 fw-extrabold text-white mb-3"
+                th:text="${isEnglishCourse ? 'Nivel Avanzado: Crecimiento y Soltura Técnica' : 'Advanced Level: Robust Growth & Technical Ease'}">Advanced Level</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 700px;"
+               th:text="${isEnglishCourse ?
+                       'Tu árbol lingüístico se fortalece. Expresión fluida, espontánea y comprensión de sentidos implícitos en textos complejos.' :
+                       'Your linguistic tree grows tall. Achieve fluent, spontaneous expression and grasp implicit meanings in technical texts.'}">
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5 px-3">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-8">
+                <div class="wse-card p-4 shadow-sm">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-award-fill"></i></span>
+                        <h3 class="h4 fw-bold text-woodland-dark mb-0"
+                            th:text="${isEnglishCourse ? 'Competencias C1 (Cambridge CAE / DELE C1)' : 'C1 Competencies (CAE / DELE C1)'}">Competencias C1</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary fs-6">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Comprensión Implícita:' : 'Implicit Understanding:'}">Comprensión:</strong>
+                            <span th:text="${isEnglishCourse ? 'Identificación de matices, sarcasmo, ironía y textos académicos o técnicos extensos.' : 'Grasping implicit nuances, irony, and complex technical or academic reports.'}">Details</span>
+                        </li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Expresión Espontánea:' : 'Spontaneous Expression:'}">Expresión:</strong>
+                            <span th:text="${isEnglishCourse ? 'Comunicación fluida sin búsqueda evidente de expresiones o pausas artificiales.' : 'Fluent interaction for social, academic, and professional purposes without searching for words.'}">Details</span>
+                        </li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Cohesión Estructural:' : 'Structural Cohesion:'}">Cohesión:</strong>
+                            <span th:text="${isEnglishCourse ? 'Dominio de conectores avanzados, sintaxis compleja y redacción ejecutiva.' : 'Mastery of advanced discourse markers, complex syntax, and executive report writing.'}">Details</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ========================================== -->
+<!-- 4. CONVERSACIONAL (CEFR C2) | METÁFORA: ÁRBOL 🌳 -->
+<!-- ========================================== -->
+<div th:if="${levelCode == 'conversacional'}">
+    <header class="wse-hero-banner py-5 text-center shadow-sm">
+        <div class="container px-3">
+            <div class="display-3 mb-2">🌳</div>
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold">
+                    <span th:text="${isEnglishCourse ? 'Etapa 4: El Árbol Frondoso (MCERL C2 & Temas Diarios)' : 'Stage 4: The Full Tree (CEFR C2 & Daily Topics)'}">Stage 4: Tree</span>
+                </span>
+            <h1 class="display-5 fw-extrabold text-white mb-3"
+                th:text="${isEnglishCourse ? 'Nivel Conversacional: Dominio Bilingüe Nativo' : 'Conversational Level: Native Bilingual Mastery'}">Conversational Level</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width: 700px;"
+               th:text="${isEnglishCourse ?
+                       'Como un árbol frondoso integrado en el ecosistema, dominas el idioma con soltura nativa, modismos y soltura cultural.' :
+                       'Like a majestic tree rooted in the forest, you master the language with native-like ease, idioms, and cultural resonance.'}">
+            </p>
+        </div>
+    </header>
+
+    <main class="container py-5 px-3">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-8">
+                <div class="wse-card p-4 shadow-sm">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="fs-2 text-forest-green me-2"><i class="bi bi-chat-square-quote-fill"></i></span>
+                        <h3 class="h4 fw-bold text-woodland-dark mb-0"
+                            th:text="${isEnglishCourse ? 'Maestría Conversacional & Temas de Actualidad' : 'Conversational Mastery & Current Events'}">Conversacional</h3>
+                    </div>
+                    <ul class="list-unstyled text-secondary fs-6">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Modismos y Expresiones Coloquiales:' : 'Idioms & Colloquialisms:'}">Modismos:</strong>
+                            <span th:text="${isEnglishCourse ? 'Manejo natural de refranes, expresiones de la calle y humor cultural.' : 'Natural usage of proverbs, slang, colloquial nuances, and cultural humor.'}">Details</span>
+                        </li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Debates de Actualidad Día a Día:' : 'Daily Current Event Debates:'}">Debates:</strong>
+                            <span th:text="${isEnglishCourse ? 'Análisis espontáneo de noticias, cine, política, tecnología y literatura.' : 'Spontaneous discussion on global news, cinema, politics, technology, and literature.'}">Details</span>
+                        </li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                            <strong th:text="${isEnglishCourse ? 'Ajustes Sutiles de Estilo:' : 'Subtle Style Adjustments:'}">Estilo:</strong>
+                            <span th:text="${isEnglishCourse ? 'Capacidad de modificar el registro, tono y matices de significado sin esfuerzo.' : 'Effortlessly switching register, tone, and delicate shades of meaning.'}">Details</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Global CTA Banner -->
+<div class="container pb-5 px-3">
+    <div class="wse-card p-4 p-md-5 text-center shadow-sm">
+        <h3 class="fw-bold text-woodland-dark mb-3"
+            th:text="${isEnglishCourse ? '¿Quieres evaluar tu nivel actual?' : 'Want to evaluate your current level?'}">Evaluate Level</h3>
+        <p class="text-muted mb-4 mx-auto" style="max-width: 600px;"
+           th:text="${isEnglishCourse ?
+                   'Reserva una sesión diagnóstica de 15 minutos para evaluar tus competencias e integrar tu plan personalizado.' :
+                   'Book a 15-minute diagnostic session to assess your skills and build your tailored learning path.'}">
+        </p>
+        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary shadow-sm py-3 px-5 fs-5">
+            <i class="bi bi-calendar-check me-2"></i>
+            <span th:text="${isEnglishCourse ? 'Solicitar Evaluación de Nivel' : 'Request Level Assessment'}">Book Assessment</span>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

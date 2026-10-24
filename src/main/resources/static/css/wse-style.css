@@ -123,3 +123,22 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .bg-woodland-dark {
     background-color: var(--wse-woodland-dark) !important;
 }
+
+/* Flat Circular Flags */
+.flag-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: var(--wse-light-bg);
+    border: none !important; /* Removes gray border */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(47, 79, 79, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.flag-circle:hover {
+    transform: scale(1.12);
+}

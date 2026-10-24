@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEnglishCourse ? 'Metodología | Task-Based Learning' : 'Methodology | Task-Based Learning'}">Task-Based Learning</title>
+    <!-- Bootstrap 5 & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Woodland Whisper Theme -->
+    <link rel="stylesheet" th:href="@{/css/wse-style.css}">
+</head>
+<body class="wse-section-bg py-4">
+
+<!-- Header / Navbar -->
+<nav class="navbar navbar-expand-lg wse-navbar shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand text-white fw-bold fs-6"
+           th:href="${isEnglishCourse ? '/learn-english' : '/learn-spanish'}">
+            <i class="bi bi-arrow-left me-1"></i>
+            <span th:text="${navBack}">← Back</span>
+        </a>
+    </div>
+</nav>
+
+<!-- Hero Header -->
+<header class="wse-hero-banner py-5 text-center shadow-sm">
+    <div class="container px-3">
+            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold"
+                  th:text="${isEnglishCourse ? 'Aprender Haciendo' : 'Learning by Doing'}">
+                Task-Based Language Teaching
+            </span>
+        <h1 class="display-5 fw-extrabold text-white mb-3"
+            th:text="${isEnglishCourse ? '¿Qué es Task-Based Learning (TBL)?' : 'What is Task-Based Learning (TBL)?'}">
+            What is Task-Based Learning?
+        </h1>
+        <p class="lead text-white-50 mx-auto" style="max-width: 700px;"
+           th:text="${isEnglishCourse ?
+                   'Una metodología práctica enfocada en usar el idioma como una herramienta para resolver situaciones reales, en lugar de memorizar reglas gramaticales teóricas.' :
+                   'A practical methodology focused on using language as a real tool to achieve meaningful goals, rather than memorizing abstract grammar rules.'}">
+        </p>
+    </div>
+</header>
+
+<main class="container py-5 px-3">
+
+    <!-- Core Principles Comparison Grid -->
+    <div class="row g-4 mb-5">
+
+        <!-- Traditional Method (Passive) -->
+        <div class="col-md-6">
+            <div class="wse-card p-4 h-100 border-start border-4 border-danger">
+                <h3 class="h5 fw-bold text-muted mb-3"
+                    th:text="${isEnglishCourse ? 'Método Tradicional (Pasivo)' : 'Traditional Method (Passive)'}">
+                    Método Tradicional (Pasivo)
+                </h3>
+                <ul class="list-unstyled text-secondary mb-0">
+                    <li class="mb-2">
+                        <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'Se enfoca en memorizar reglas gramaticales abstractas y ejercicios repetitivos.' :
+                        'Focuses on endless grammar drills and abstract memorization.'}">
+                    </span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'El profesor habla el 80% del tiempo durante la clase.' :
+                        'Teacher speaks 80% of the class time.'}">
+                    </span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'Ejercicios artificiales de libros desconectados de la vida real.' :
+                        'Artificial textbook exercises disconnected from daily life.'}">
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Task-Based Learning (Active) -->
+        <div class="col-md-6">
+            <div class="wse-card p-4 h-100 border-start border-4 border-success">
+                <h3 class="h5 fw-bold text-forest-green mb-3"
+                    th:text="${isEnglishCourse ? 'Task-Based Learning (Activo)' : 'Task-Based Learning (Active)'}">
+                    Task-Based Learning (Activo)
+                </h3>
+                <ul class="list-unstyled text-secondary mb-0">
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'El idioma se convierte en una herramienta real para lograr objetivos prácticos.' :
+                        'Language becomes a real tool to accomplish practical goals.'}">
+                    </span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'El estudiante habla el 80% del tiempo mediante roleplays y práctica activa.' :
+                        'Student speaks 80% of the time through roleplays and active practice.'}">
+                    </span>
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
+                        <span th:text="${isEnglishCourse ?
+                        'Escenarios auténticos: reservas de viajes, entrevistas de trabajo y conversación cotidiana.' :
+                        'Authentic scenarios: travel bookings, job interviews, and daily conversation.'}">
+                    </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The 3 Phases Deep-Dive Section -->
+    <div class="text-center mb-5">
+            <span class="wse-badge mb-2 d-inline-block"
+                  th:text="${isEnglishCourse ? 'Estructura de una Clase' : 'Lesson Structure'}">
+                Framework
+            </span>
+        <h2 class="fw-bold text-woodland-dark"
+            th:text="${isEnglishCourse ? 'Las 3 Fases de Cada Sesión' : 'The 3 Phases of Every Session'}">
+            The 3 Phases
+        </h2>
+    </div>
+
+    <div class="row g-4 justify-content-center mb-5">
+
+        <!-- Phase 1: Pre-Task -->
+        <div class="col-lg-4">
+            <div class="wse-card p-4 h-100 text-center">
+                <div class="fs-1 text-forest-green mb-3"><i class="bi bi-compass-fill"></i></div>
+                <h3 class="h4 fw-bold text-woodland-dark mb-3"
+                    th:text="${isEnglishCourse ? '1. Preparación (Pre-Task)' : '1. Preparation (Pre-Task)'}">
+                    1. Pre-Task
+                </h3>
+                <p class="text-muted"
+                   th:text="${isEnglishCourse ?
+                           'Creamos un ambiente cómodo y sin presión. Introducimos el tema, el vocabulario clave y las frases útiles que necesitarás para la actividad principal.' :
+                           'We set an anxiety-free, motivating environment. We introduce the topic, key vocabulary, and functional expressions you will need for the main task.'}">
+                </p>
+            </div>
+        </div>
+
+        <!-- Phase 2: Task Cycle -->
+        <div class="col-lg-4">
+            <div class="wse-card p-4 h-100 text-center">
+                <div class="fs-1 text-forest-green mb-3"><i class="bi bi-chat-quote-fill"></i></div>
+                <h3 class="h4 fw-bold text-woodland-dark mb-3"
+                    th:text="${isEnglishCourse ? '2. Práctica Real (Task Cycle)' : '2. Real Practice (Task Cycle)'}">
+                    2. Task Cycle
+                </h3>
+                <p class="text-muted"
+                   th:text="${isEnglishCourse ?
+                           'Pones en práctica tus conocimientos en situaciones reales: roleplays de entrevistas de trabajo, reserva de viajes, debates o resolución de problemas prácticos con acompañamiento continuo.' :
+                           'You put your skills into action through real scenarios: job interview roleplays, travel arrangements, business negotiations, or practical problem-solving with real-time feedback.'}">
+                </p>
+            </div>
+        </div>
+
+        <!-- Phase 3: Post-Task -->
+        <div class="col-lg-4">
+            <div class="wse-card p-4 h-100 text-center">
+                <div class="fs-1 text-forest-green mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                <h3 class="h4 fw-bold text-woodland-dark mb-3"
+                    th:text="${isEnglishCourse ? '3. Consolidación (Post-Task)' : '3. Consolidation (Post-Task)'}">
+                    3. Post-Task
+                </h3>
+                <p class="text-muted"
+                   th:text="${isEnglishCourse ?
+                           'Reflexionamos sobre el desempeño, analizamos las estructuras gramaticales utilizadas, perfeccionamos la pronunciación y construimos tu lista personal de nuevo vocabulario.' :
+                           'We review performance, analyze grammar structures used during the task, refine pronunciation, and build your personal toolbox of new phrases.'}">
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Call to Action Card -->
+    <div class="wse-card p-4 p-md-5 text-center shadow-sm">
+        <h3 class="fw-bold text-woodland-dark mb-3"
+            th:text="${isEnglishCourse ? '¿Listo para experimentar el método Task-Based Learning?' : 'Ready to experience Task-Based Learning?'}">
+            Ready to start?
+        </h3>
+        <p class="text-muted mb-4 mx-auto" style="max-width: 600px;"
+           th:text="${isEnglishCourse ?
+                   'Reserva tu primera sesión personalizada y empieza a comunicarte con confianza desde la primera clase.' :
+                   'Book your first trial session and start communicating with real-world confidence from day one.'}">
+        </p>
+        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary shadow-sm py-3 px-5 fs-5">
+            <i class="bi bi-calendar-check me-2"></i>
+            <span th:text="${isEnglishCourse ? 'Reserva tu Clase de Prueba' : 'Book Your Trial Session'}">Book Trial</span>
+        </a>
+    </div>
+
+</main>
+
+</body>
+</html>
