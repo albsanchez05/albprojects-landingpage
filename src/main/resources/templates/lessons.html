@@ -148,34 +148,41 @@
     </div>
 </section>
 
-<!-- 4. PRICING & COURSE LEVELS SECTION -->
+<!-- 4. PRICING & COURSE LEVELS SECTION (Updated with $25/hr Price) -->
 <section class="py-5 border-bottom">
     <div class="container px-3">
         <div class="text-center mb-5">
-            <!-- Line 156 Fixed: String comparison is null-safe -->
             <span class="wse-badge mb-2 d-inline-block"
-                  th:text="${targetLanguage == 'ENGLISH' ? 'Niveles y Programas' : 'Course Levels'}">
-                Course Levels
+                  th:text="${targetLanguage == 'ENGLISH' ? 'Niveles y Tarifas' : 'Levels & Pricing'}">
+                Levels & Pricing
             </span>
             <h2 class="fw-bold text-woodland-dark"
-                th:text="${targetLanguage == 'ENGLISH' ? 'Programas Adaptados a Tu Nivel' : 'Programs Tailored to Your Level'}">
+                th:text="${targetLanguage == 'ENGLISH' ? 'Programas 1-a-1 Adaptados a Tu Nivel' : '1-on-1 Programs Tailored to Your Level'}">
                 Tailored Programs
             </h2>
             <p class="text-muted mx-auto" style="max-width: 650px;"
                th:text="${targetLanguage == 'ENGLISH' ?
-                   'Siguiendo el Marco Común Europeo de Referencia para las Lenguas (MCERL).' :
-                   'Structured according to the Common European Framework of Reference for Languages (CEFR).'}">
+                   'Clases individuales personalizadas con el método Task-Based Learning. Tarifa transparente sin permanencia.' :
+                   'Personalized one-on-one lessons using Task-Based Learning. Transparent pricing with no long-term contracts.'}">
             </p>
         </div>
 
         <div class="row g-4 justify-content-center">
 
-            <!-- Card 1: Básico -->
+            <!-- Card 1: Básico (A1 - A2) -->
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="wse-card h-100 p-4 d-flex flex-column text-center">
                     <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR A1 - A2</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-2"
+                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
                         th:text="${targetLanguage == 'ENGLISH' ? 'Básico' : 'Basic'}">Básico</h3>
+
+                    <!-- Prominent Price Tag -->
+                    <div class="my-3">
+                        <span class="display-6 fw-bold text-forest-green">$25</span>
+                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
+                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+                    </div>
+
                     <p class="text-muted flex-grow-1 fs-6"
                        th:text="${targetLanguage == 'ENGLISH' ?
                            'Fundamentos iniciales, presentaciones, compras, reservas y vocabulario esencial del día a día.' :
@@ -186,16 +193,33 @@
                             <i class="bi bi-info-circle me-1"></i>
                             <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
                         </a>
+                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
+                            <i class="bi bi-calendar2-check me-1"></i>
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2: Intermedio -->
+            <!-- Card 2: Intermedio (B1 - B2) -->
             <div class="col-12 col-md-6 col-lg-3">
-                <div class="wse-card h-100 p-4 d-flex flex-column text-center">
-                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR B1 - B2</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-2"
+                <div class="wse-card h-100 p-4 d-flex flex-column text-center position-relative">
+                    <!-- Popular Tag -->
+                    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-forest-green px-3 py-2 shadow-sm"
+                          th:text="${targetLanguage == 'ENGLISH' ? 'Más Solicitado' : 'Most Popular'}">
+                        Most Popular
+                    </span>
+                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center mt-2">CEFR B1 - B2</span>
+                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
                         th:text="${targetLanguage == 'ENGLISH' ? 'Intermedio' : 'Intermediate'}">Intermedio</h3>
+
+                    <!-- Prominent Price Tag -->
+                    <div class="my-3">
+                        <span class="display-6 fw-bold text-forest-green">$25</span>
+                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
+                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+                    </div>
+
                     <p class="text-muted flex-grow-1 fs-6"
                        th:text="${targetLanguage == 'ENGLISH' ?
                            'Autonomía en viajes, debates, expresión de opiniones, comunicación laboral y textos complejos.' :
@@ -206,16 +230,28 @@
                             <i class="bi bi-info-circle me-1"></i>
                             <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
                         </a>
+                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
+                            <i class="bi bi-calendar2-check me-1"></i>
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 3: Avanzado -->
+            <!-- Card 3: Avanzado (C1) -->
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="wse-card h-100 p-4 d-flex flex-column text-center">
                     <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR C1</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-2"
+                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
                         th:text="${targetLanguage == 'ENGLISH' ? 'Avanzado' : 'Advanced'}">Avanzado</h3>
+
+                    <!-- Prominent Price Tag -->
+                    <div class="my-3">
+                        <span class="display-6 fw-bold text-forest-green">$25</span>
+                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
+                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+                    </div>
+
                     <p class="text-muted flex-grow-1 fs-6"
                        th:text="${targetLanguage == 'ENGLISH' ?
                            'Fluidez espontánea, informes profesionales, matices implícitos y sintaxis avanzada.' :
@@ -226,16 +262,28 @@
                             <i class="bi bi-info-circle me-1"></i>
                             <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
                         </a>
+                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
+                            <i class="bi bi-calendar2-check me-1"></i>
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 4: Conversacional -->
+            <!-- Card 4: Conversacional (C2 & Day-to-Day Topics) -->
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="wse-card h-100 p-4 d-flex flex-column text-center">
                     <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR C2 & Topics</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-2"
+                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
                         th:text="${targetLanguage == 'ENGLISH' ? 'Conversacional' : 'Conversational'}">Conversacional</h3>
+
+                    <!-- Prominent Price Tag -->
+                    <div class="my-3">
+                        <span class="display-6 fw-bold text-forest-green">$25</span>
+                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
+                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+                    </div>
+
                     <p class="text-muted flex-grow-1 fs-6"
                        th:text="${targetLanguage == 'ENGLISH' ?
                            'Dominio natural, modismos, frases hechas, análisis de actualidad y debates culturales.' :
@@ -246,13 +294,58 @@
                             <i class="bi bi-info-circle me-1"></i>
                             <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
                         </a>
+                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
+                            <i class="bi bi-calendar2-check me-1"></i>
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <!-- GROUP CLASSES CALLOUT SECTION -->
+    <div class="container py-4">
+        <div class="wse-card p-4 p-md-5 bg-white border border-2 border-success-subtle shadow-sm">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-forest-green px-3 py-2 rounded-pill text-white fw-bold">
+                        <i class="bi bi-people-fill me-1"></i>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? '¡Opción Económica!' : 'Budget-Friendly Option!'}">Budget Friendly</span>
+                    </span>
+                        <span class="text-forest-green fw-bold small"
+                              th:text="${targetLanguage == 'ENGLISH' ? 'Grupos de 3 a 5 estudiantes' : 'Small groups of 3-5 students'}">
+                        3-5 students
+                    </span>
+                    </div>
+                    <h3 class="h3 fw-bold text-woodland-dark mb-2"
+                        th:text="${targetLanguage == 'ENGLISH' ? '¿Prefieres aprender en grupo? Clases Semanales Reducidas' : 'Prefer learning with others? Small Group Workshops'}">
+                        Small Group Classes
+                    </h3>
+                    <p class="text-muted mb-0"
+                       th:text="${targetLanguage == 'ENGLISH' ?
+                       'Aprende junto a compañeros de tu mismo nivel a un precio más accesible. Practicamos dinámicas conversacionales dinámicas, debates y tareas grupales auténticas.' :
+                       'Learn alongside peers at your exact level at a reduced rate. Enjoy interactive speaking dynamics, debates, and collaborative communication tasks.'}">
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-end text-center">
+                    <div class="mb-3">
+                        <span class="display-5 fw-extrabold text-forest-green">$15</span>
+                        <span class="text-muted fs-6" th:text="${targetLanguage == 'ENGLISH' ? '/ hora por alumno' : '/ hr per student'}">/ hr per student</span>
+                        <div class="small text-muted" th:text="${targetLanguage == 'ENGLISH' ? 'Ahorras un 40% vs. clases privadas' : 'Save 40% vs. 1-on-1 private lessons'}">Save 40%</div>
+                    </div>
+                    <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary px-4 py-2 shadow-sm w-100 w-lg-auto">
+                        <i class="bi bi-chat-dots-fill me-2"></i>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Consultar Disponibilidad de Grupo' : 'Inquire About Group Spots'}">Inquire Group</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 
 <!-- 5. CONTACT & INQUIRY FORM SECTION -->
 <section id="contact" class="py-5 wse-section-bg">
