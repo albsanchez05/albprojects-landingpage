@@ -3,342 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle}">Language Tutor Platform</title>
-    <!-- Bootstrap 5 CSS -->
+    <title th:text="${targetLanguage == 'ENGLISH' ? 'Clases de Inglés | Alberto Sánchez' : 'Spanish Lessons | Alberto Sánchez'}">Lessons | Alberto Sánchez</title>
+    <!-- Bootstrap 5 & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <!-- Custom Theme -->
-    <link rel="stylesheet" th:href="@{/css/wse-style.css}">
+    <!-- Woodland Whisper Central Theme -->
+    <link rel="stylesheet" th:href="@{/css/wse-style.css}" href="/css/wse-style.css">
 </head>
-<body>
+<body class="wse-section-bg">
 
-<!-- Header / Navbar -->
-<nav class="navbar navbar-expand-lg wse-navbar shadow-sm sticky-top">
-    <div class="container">
-        <a class="navbar-brand text-white fw-bold" href="/" th:text="${navBack}">← Volver a la selección de idioma</a>
+<!-- ======================================================== -->
+<!-- 1. TOP NAVBAR: ONLY "CAMBIAR IDIOMA" ON THE LEFT         -->
+<!-- ======================================================== -->
+<nav class="navbar navbar-dark bg-woodland-dark py-3 shadow-sm">
+    <div class="container px-3 d-flex justify-content-between align-items-center">
+        <!-- Left: Only Language Switcher -->
+        <a th:href="@{/}" class="text-white text-decoration-none fw-semibold d-inline-flex align-items-center gap-2">
+            <i class="bi bi-arrow-left-circle-fill text-forest-green" style="color: #52B788 !important; font-size: 1.15rem;"></i>
+            <span th:text="${targetLanguage == 'ENGLISH' ? 'Cambiar Idioma' : 'Switch Language'}">Cambiar Idioma</span>
+        </a>
+
+        <!-- Right: Quick Contact Button -->
+        <a th:href="@{/contact(lang=${targetLanguage},reason='Contactar')}" class="btn btn-sm btn-wse-primary">
+            <span th:text="${targetLanguage == 'ENGLISH' ? 'Contactar' : 'Contact Me'}">Contactar</span>
+        </a>
     </div>
 </nav>
 
-<!-- 1. LANGUAGE CHOICE BANNER (Forest Green Background) -->
-<header class="wse-hero-banner py-5 shadow-sm">
-    <div class="container text-center px-3">
-            <span class="badge bg-white text-forest-green mb-3 px-3 py-2 rounded-pill fw-bold"
-                  th:text="${targetLanguage == 'ENGLISH' ? 'Clases de Inglés Personalizadas' : 'Customized Spanish Lessons'}">
-                Language Course
+<!-- Forest Green Course Orientation Hero Banner -->
+<header class="bg-forest-green text-white py-4 py-md-5 text-center shadow-sm">
+    <div class="container px-3">
+            <span class="badge bg-white text-forest-green mb-2 px-3 py-2 rounded-pill fw-bold"
+                  th:text="${targetLanguage == 'ENGLISH' ? 'Cursos Personalizados de Inglés' : 'Customized Spanish Lessons'}">
+                Course Orientation
             </span>
-        <h1 class="display-5 fw-extrabold mb-3 text-white" th:text="${pageTitle}">Title</h1>
-        <p class="lead text-white-50 mx-auto mb-0" style="max-width: 650px;" th:text="${bannerSubtitle}">Subtitle</p>
+        <h1 class="display-6 fw-bold mb-2"
+            th:text="${targetLanguage == 'ENGLISH' ? 'Aprende Inglés Práctico y Real' : 'Master Conversational Spanish'}">
+            Language Mastery
+        </h1>
+        <p class="lead opacity-90 mb-0 mx-auto" style="max-width: 650px;"
+           th:text="${targetLanguage == 'ENGLISH' ?
+                   'Clases individuales y en grupo orientadas a objetivos: entrevistas de trabajo, reuniones y soltura conversacional.' :
+                   'Tailored private & group sessions: workplace readiness, travel confidence, and natural conversational fluency.'}">
+            Course subtitle
+        </p>
     </div>
 </header>
 
-<!-- 2. ABOUT ME / EXPERIENCE SECTION -->
-<section class="py-5">
+<!-- ======================================================== -->
+<!-- 2. ABOUT ME & TEACHING PHILOSOPHY HERO CARD              -->
+<!-- ======================================================== -->
+<section class="py-5 wse-section-bg border-bottom">
     <div class="container px-3">
-        <div class="row align-items-center g-4">
-            <div class="col-md-5 text-center">
-                <div class="p-4 wse-card d-inline-block bg-white shadow-sm" style="max-width: 320px;">
-                    <!-- Tutor Profile Picture with Fallback Icon -->
-                    <div class="mb-3 position-relative d-inline-block">
-                        <!-- Profile Image -->
+        <div class="wse-card bg-white p-4 p-lg-5 shadow-sm border-0 position-relative">
+            <div class="row align-items-center g-4 g-lg-5">
+
+                <!-- Alberto's Portrait (Integrated & Clean) -->
+                <div class="col-12 col-md-auto text-center text-md-start">
+                    <div class="position-relative d-inline-block">
                         <img th:src="@{/images/alberto-profile.jpg}"
                              src="/images/alberto-profile.jpg"
                              alt="Alberto Sánchez"
-                             class="rounded-circle img-thumbnail shadow-sm"
-                             style="width: 150px; height: 150px; object-fit: cover;"
-                             onerror="this.style.display='none'; document.getElementById('profile-fallback-icon').style.display='inline-block';">
-                        <!-- Clean Fallback Icon (Only shown if image fails to load) -->
-                        <div id="profile-fallback-icon" style="display: none;">
-                            <i class="bi bi-person-workspace display-1 text-forest-green"></i>
+                             class="shadow-sm"
+                             style="width: 200px; height: 245px; object-fit: cover; border-radius: 16px; border: 3px solid var(--wse-card-border, #E2ECE5);"
+                             onerror="this.style.display='none'; document.getElementById('lessons-fallback-icon').style.display='inline-block';">
+
+                        <div id="lessons-fallback-icon" style="display: none;" class="fs-1 text-forest-green py-4">
+                            <i class="bi bi-person-circle" style="font-size: 6rem;"></i>
                         </div>
                     </div>
-                    <h4 class="fw-bold mb-1 text-woodland-dark" th:text="${targetLanguage == 'ENGLISH' ? 'Alberto Sánchez' : 'Alberto Sánchez'}">Alberto Sánchez</h4>
-                    <p class="text-muted mb-0" th:text="${targetLanguage == 'ENGLISH' ? 'Profesor de Idiomas & Tutor Personal' : 'Language Instructor & Coach'}">Language Tutor</p>
                 </div>
-            </div>
-            <div class="col-md-7">
-                <span class="wse-badge mb-2 d-inline-block" th:text="${targetLanguage == 'ENGLISH' ? 'Sobre Mí' : 'About Me'}">About Me</span>
-                <h2 class="fw-bold mb-3 text-woodland-dark" th:text="${targetLanguage == 'ENGLISH' ? 'Pasión por la Enseñanza de Idiomas' : 'Passion for Teaching Languages'}">Experience</h2>
-                <p class="text-muted" th:text="${targetLanguage == 'ENGLISH' ?
-                    'Cuento con más de 5 años de experiencia ayudando a profesionales y estudiantes a romper la barrera del idioma. Mi objetivo es darte la seguridad necesaria para expresarte con naturalidad en el mundo real.' :
-                    'With over 5 years of experience coaching students and working professionals, I focus on building natural conversational confidence and clear communication.'}">
-                </p>
-                <ul class="list-unstyled text-secondary">
-                    <li class="mb-2">
-                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
-                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Clases 100% personalizadas según tus metas' : '100% customized 1-on-1 lessons'}">Customized lessons</span>
-                    </li>
-                    <li class="mb-2">
-                        <i class="bi bi-check-circle-fill text-forest-green me-2"></i>
-                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Horarios flexibles adaptados a tu agenda' : 'Flexible scheduling for busy professionals'}">Flexible schedule</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- 3. TASK-BASED LEARNING METHODOLOGY SECTION -->
-<section class="py-5 wse-section-bg border-top border-bottom">
-    <div class="container px-3">
-        <div class="text-center mb-5">
-            <span class="wse-badge mb-2 d-inline-block"
-                  th:text="${targetLanguage == 'ENGLISH' ? 'Nuestra Metodología' : 'Our Methodology'}">
-                Methodology
-            </span>
-            <h2 class="fw-bold text-woodland-dark"
-                th:text="${targetLanguage == 'ENGLISH' ? 'Aprender Haciendo (Task-Based Learning)' : 'Learning by Doing (Task-Based Learning)'}">
-                Methodology
-            </h2>
-            <p class="text-muted mx-auto mb-4" style="max-width: 700px;"
-               th:text="${targetLanguage == 'ENGLISH' ?
-                   'Olvídate de memorizar gramática abstracta. Nuestro método se enfoca en comunicarte de manera efectiva en situaciones reales desde el primer día.' :
-                   'Forget endless grammar drills. Our practical approach focuses on real-world communication skills from day one.'}">
-            </p>
+                <!-- Unified Tutor Identity & Bio -->
+                <div class="col-12 col-md">
 
-            <!-- Prominent "Learn More" / "Saber más" Button -->
-            <a th:href="@{/methodology(lang=${targetLanguage})}" class="btn btn-wse-outline shadow-sm">
-                <i class="bi bi-book-half me-2"></i>
-                <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más sobre la metodología' : 'Learn more about the methodology'}">
-                    Learn More
-                </span>
-            </a>
-        </div>
-
-        <!-- TBL 3-Step Summary Cards -->
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-                <div class="wse-card p-4 h-100 text-center">
-                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-compass-fill"></i></div>
-                    <h4 class="fw-bold mb-2 text-woodland-dark"
-                        th:text="${targetLanguage == 'ENGLISH' ? '1. Preparación' : '1. Pre-Task'}">1. Preparation</h4>
-                    <p class="text-muted mb-0"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Activamos el vocabulario y las frases clave para una situación real (viajes, reuniones, entrevistas) sin presión.' :
-                           'We activate key vocabulary and context for real scenarios (job interviews, travel, meetings) in a relaxed environment.'}">
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="wse-card p-4 h-100 text-center">
-                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-chat-quote-fill"></i></div>
-                    <h4 class="fw-bold mb-2 text-woodland-dark"
-                        th:text="${targetLanguage == 'ENGLISH' ? '2. Práctica Real' : '2. Task Cycle'}">2. Real Practice</h4>
-                    <p class="text-muted mb-0"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Pones a prueba tu fluidez mediante roleplays interactivos y resolución de problemas prácticos con feedback personalizado.' :
-                           'You apply your skills through interactive roleplays and practical problem-solving with tailored coaching.'}">
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="wse-card p-4 h-100 text-center">
-                    <div class="fs-1 text-forest-green mb-3"><i class="bi bi-graph-up-arrow"></i></div>
-                    <h4 class="fw-bold mb-2 text-woodland-dark"
-                        th:text="${targetLanguage == 'ENGLISH' ? '3. Consolidación' : '3. Post-Task'}">3. Consolidation</h4>
-                    <p class="text-muted mb-0"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Refinamos puntos gramaticales concretos, corregimos detalles de pronunciación y consolidamos tus avances.' :
-                           'We review key grammar points, refine pronunciation, and solidify what you learned for lasting confidence.'}">
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 4. PRICING & COURSE LEVELS SECTION (Updated with $25/hr Price) -->
-<section class="py-5 border-bottom">
-    <div class="container px-3">
-        <div class="text-center mb-5">
-            <span class="wse-badge mb-2 d-inline-block"
-                  th:text="${targetLanguage == 'ENGLISH' ? 'Niveles y Tarifas' : 'Levels & Pricing'}">
-                Levels & Pricing
-            </span>
-            <h2 class="fw-bold text-woodland-dark"
-                th:text="${targetLanguage == 'ENGLISH' ? 'Programas 1-a-1 Adaptados a Tu Nivel' : '1-on-1 Programs Tailored to Your Level'}">
-                Tailored Programs
-            </h2>
-            <p class="text-muted mx-auto" style="max-width: 650px;"
-               th:text="${targetLanguage == 'ENGLISH' ?
-                   'Clases individuales personalizadas con el método Task-Based Learning. Tarifa transparente sin permanencia.' :
-                   'Personalized one-on-one lessons using Task-Based Learning. Transparent pricing with no long-term contracts.'}">
-            </p>
-        </div>
-
-        <div class="row g-4 justify-content-center">
-
-            <!-- Card 1: Básico (A1 - A2) -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="wse-card h-100 p-4 d-flex flex-column text-center">
-                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR A1 - A2</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
-                        th:text="${targetLanguage == 'ENGLISH' ? 'Básico' : 'Basic'}">Básico</h3>
-
-                    <!-- Prominent Price Tag -->
-                    <div class="my-3">
-                        <span class="display-6 fw-bold text-forest-green">$25</span>
-                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
-                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+                    <!-- Top Identity Row: Badge + Tutor Name + Rating -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="wse-badge"
+                                  th:text="${targetLanguage == 'ENGLISH' ? 'Profesor Certificado' : 'Certified Coach'}">
+                                Profesor Certificado
+                            </span>
+                            <span class="text-muted small">·</span>
+                            <span class="text-muted small fw-semibold"
+                                  th:text="${targetLanguage == 'ENGLISH' ? 'Especialista en TBL' : 'TBL Specialist'}">
+                                Especialista en TBL
+                            </span>
+                        </div>
+                        <div class="d-inline-flex align-items-center gap-1 text-warning small bg-light px-2 py-1 rounded-pill border">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-muted fw-bold ms-1">5.0</span>
+                            <span class="text-muted">(+5 Años)</span>
+                        </div>
                     </div>
 
-                    <p class="text-muted flex-grow-1 fs-6"
+                    <!-- Headline -->
+                    <h2 class="h3 fw-bold text-woodland-dark mb-2"
+                        th:text="${targetLanguage == 'ENGLISH' ?
+                            'Aprende a comunicarte con soltura desde la primera clase' :
+                            'Master real-world fluency through active conversation'}">
+                        Master real-world fluency
+                    </h2>
+
+                    <!-- Personal Introduction -->
+                    <p class="text-muted fs-6 mb-4"
                        th:text="${targetLanguage == 'ENGLISH' ?
-                           'Fundamentos iniciales, presentaciones, compras, reservas y vocabulario esencial del día a día.' :
-                           'Foundational skills, introductions, daily routines, travel, and essential everyday vocabulary.'}">
+                           'Hola, soy Alberto. Mi objetivo no es que memorices listas de reglas aisladas, sino que uses el idioma en situaciones reales: simulaciones laborales, entrevistas, viajes y debates adaptados a tu propio ritmo.' :
+                           'Hi, I am Alberto. My teaching philosophy focuses on communicative autonomy. Together, we tackle authentic real life scenarios, work presentations, travel readiness, and natural dialogues tailored to your personal pace.'}">
+                        Personal teaching message
                     </p>
-                    <div class="pt-3 border-top mt-auto">
-                        <a th:href="@{/levels/basico(lang=${targetLanguage})}" class="btn btn-wse-outline btn-sm w-100 mb-2">
-                            <i class="bi bi-info-circle me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
+
+                    <!-- Cohesive Value Chips Row -->
+                    <div class="row g-2 text-start">
+                        <div class="col-12 col-sm-4">
+                            <div class="d-flex align-items-center gap-2 p-2 rounded-3" style="background-color: var(--wse-light-bg, #F4F9F5);">
+                                <i class="bi bi-patch-check-fill text-forest-green fs-5"></i>
+                                <span class="small fw-semibold text-woodland-dark"
+                                      th:text="${targetLanguage == 'ENGLISH' ? '100% Personalizado' : '100% Customized'}">100% Personalizado</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="d-flex align-items-center gap-2 p-2 rounded-3" style="background-color: var(--wse-light-bg, #F4F9F5);">
+                                <i class="bi bi-chat-dots-fill text-forest-green fs-5"></i>
+                                <span class="small fw-semibold text-woodland-dark"
+                                      th:text="${targetLanguage == 'ENGLISH' ? 'Enfoque Hablado' : 'Speaking-Focused'}">Enfoque Hablado</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="d-flex align-items-center gap-2 p-2 rounded-3" style="background-color: var(--wse-light-bg, #F4F9F5);">
+                                <i class="bi bi-clock-history text-forest-green fs-5"></i>
+                                <span class="small fw-semibold text-woodland-dark"
+                                      th:text="${targetLanguage == 'ENGLISH' ? 'Horarios Flexibles' : 'Flexible Hours'}">Horarios Flexibles</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================== -->
+<!-- 3. TASK-BASED LEARNING (TBL) METHODOLOGY OVERVIEW        -->
+<!-- ======================================================== -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container px-3 text-center">
+        <span class="wse-badge mb-2" th:text="${targetLanguage == 'ENGLISH' ? '¿Cómo Aprendemos?' : 'How We Learn'}">How We Learn</span>
+        <h2 class="display-6 fw-bold text-woodland-dark mb-3"
+            th:text="${targetLanguage == 'ENGLISH' ? 'Método Task-Based Learning (TBL)' : 'Task-Based Learning (TBL) Method'}">
+            Task-Based Learning
+        </h2>
+        <p class="text-muted mx-auto mb-5" style="max-width: 600px;"
+           th:text="${targetLanguage == 'ENGLISH' ?
+                   'El idioma se interioriza mejor cuando se utiliza para resolver tareas reales. Cada sesión sigue 3 fases prácticas:' :
+                   'Languages are acquired best when used to achieve real tasks. Each lesson follows a 3-step practical framework:'}">
+            Framework introduction
+        </p>
+
+        <div class="row g-4 text-start">
+            <!-- Phase 1: Pre-Task -->
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 wse-section-bg border-0">
+                    <div class="fs-2 text-forest-green mb-3"><i class="bi bi-compass"></i></div>
+                    <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                        th:text="${targetLanguage == 'ENGLISH' ? '1. Preparación (Pre-Task)' : '1. Preparation (Pre-Task)'}">1. Pre-Task</h3>
+                    <p class="text-muted small mb-0"
+                       th:text="${targetLanguage == 'ENGLISH' ?
+                               'Activamos el vocabulario clave y el contexto sin presiones, fijando metas claras para la conversación.' :
+                               'We introduce key vocabulary, relevant context, and clear goals without anxiety or pressure.'}">
+                    </p>
+                </div>
+            </div>
+
+            <!-- Phase 2: Task Cycle -->
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 wse-section-bg border-0">
+                    <div class="fs-2 text-forest-green mb-3"><i class="bi bi-chat-square-quote"></i></div>
+                    <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                        th:text="${targetLanguage == 'ENGLISH' ? '2. Práctica Real (Task Cycle)' : '2. Real Practice (Task Cycle)'}">2. Task Cycle</h3>
+                    <p class="text-muted small mb-0"
+                       th:text="${targetLanguage == 'ENGLISH' ?
+                               'Simulamos situaciones reales: reuniones, viajes o entrevistas, guiándote en tiempo real.' :
+                               'Authentic task execution: roleplays, debates, and negotiations with personalized coaching.'}">
+                    </p>
+                </div>
+            </div>
+
+            <!-- Phase 3: Post-Task -->
+            <div class="col-md-4">
+                <div class="wse-card p-4 h-100 wse-section-bg border-0">
+                    <div class="fs-2 text-forest-green mb-3"><i class="bi bi-check2-circle"></i></div>
+                    <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                        th:text="${targetLanguage == 'ENGLISH' ? '3. Consolidación (Post-Task)' : '3. Consolidation (Post-Task)'}">3. Post-Task</h3>
+                    <p class="text-muted small mb-0"
+                       th:text="${targetLanguage == 'ENGLISH' ?
+                               'Repasamos dudas, pulimos pronunciación y fijamos la gramática aprendida de forma natural.' :
+                               'Review key language structures, correct pronunciation, and build your personalized phrasebook.'}">
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deep Dive Link -->
+        <div class="mt-4">
+            <a th:href="@{/methodology(lang=${targetLanguage})}" class="btn btn-wse-outline">
+                <span th:text="${targetLanguage == 'ENGLISH' ? 'Conocer más sobre el método TBL' : 'Learn more about TBL methodology'}">Explore Methodology</span>
+                <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================== -->
+<!-- 4. 4-TIER COURSE LEVEL CARDS                             -->
+<!-- ======================================================== -->
+<section class="py-5 wse-section-bg border-bottom">
+    <div class="container px-3">
+        <div class="text-center mb-5">
+            <span class="wse-badge mb-2" th:text="${targetLanguage == 'ENGLISH' ? 'Niveles Disponibles' : 'Available Tiers'}">Levels</span>
+            <h2 class="display-6 fw-bold text-woodland-dark mb-2"
+                th:text="${targetLanguage == 'ENGLISH' ? 'Elige tu Nivel y Objetivos' : 'Choose Your Level & Goals'}">
+                Course Levels
+            </h2>
+            <p class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? 'Alineados con el Marco Común Europeo (MCERL)' : 'Aligned with the CEFR Standard Framework'}">
+                Framework Alignment
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Card 1: Básico (A1 - A2) -->
+            <div class="col-md-6 col-lg-3">
+                <div class="wse-card p-4 h-100 d-flex flex-column justify-content-between bg-white border-0">
+                    <div>
+                        <span class="badge bg-light text-forest-green fw-bold mb-2">A1 · A2</span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                            th:text="${targetLanguage == 'ENGLISH' ? 'Básico' : 'Beginner'}">Básico</h3>
+                        <p class="text-muted small mb-3"
+                           th:text="${targetLanguage == 'ENGLISH' ?
+                                   'Presentaciones personales, compras, viajes y frases esenciales del día a día.' :
+                                   'Personal introductions, daily shopping, travel basics, and routine expressions.'}">
+                        </p>
+                    </div>
+                    <div>
+                        <div class="fs-4 fw-bold text-forest-green mb-3">$25 <span class="fs-6 text-muted fw-normal">/ hora</span></div>
+                        <a th:href="@{/levels/basico(lang=${targetLanguage})}" class="btn btn-sm btn-wse-outline w-100 mb-2">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Ver plan de estudios' : 'View Level Curriculum'}">Ver plan de estudios</span>
                         </a>
-                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
-                            <i class="bi bi-calendar2-check me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        <a th:href="@{/contact(lang=${targetLanguage},reason='Elegir nivel - Básico')}" class="btn btn-sm btn-wse-primary w-100">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Elegir Nivel' : 'Select Tier'}">Elegir Nivel</span>
                         </a>
                     </div>
                 </div>
             </div>
 
             <!-- Card 2: Intermedio (B1 - B2) -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="wse-card h-100 p-4 d-flex flex-column text-center position-relative">
-                    <!-- Popular Tag -->
-                    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-forest-green px-3 py-2 shadow-sm"
-                          th:text="${targetLanguage == 'ENGLISH' ? 'Más Solicitado' : 'Most Popular'}">
-                        Most Popular
-                    </span>
-                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center mt-2">CEFR B1 - B2</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
-                        th:text="${targetLanguage == 'ENGLISH' ? 'Intermedio' : 'Intermediate'}">Intermedio</h3>
-
-                    <!-- Prominent Price Tag -->
-                    <div class="my-3">
-                        <span class="display-6 fw-bold text-forest-green">$25</span>
-                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
-                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+            <div class="col-md-6 col-lg-3">
+                <div class="wse-card p-4 h-100 d-flex flex-column justify-content-between bg-white border-0">
+                    <div>
+                        <span class="badge bg-light text-forest-green fw-bold mb-2">B1 · B2</span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                            th:text="${targetLanguage == 'ENGLISH' ? 'Intermedio' : 'Intermediate'}">Intermedio</h3>
+                        <p class="text-muted small mb-3"
+                           th:text="${targetLanguage == 'ENGLISH' ?
+                                   'Conversación fluida, debates, reuniones laborales y expresión de opiniones.' :
+                                   'Workplace discussions, expressing opinions, debate readiness, and media texts.'}">
+                        </p>
                     </div>
-
-                    <p class="text-muted flex-grow-1 fs-6"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Autonomía en viajes, debates, expresión de opiniones, comunicación laboral y textos complejos.' :
-                           'Travel independence, debates, workplace communication, expressing opinions, and complex topics.'}">
-                    </p>
-                    <div class="pt-3 border-top mt-auto">
-                        <a th:href="@{/levels/intermedio(lang=${targetLanguage})}" class="btn btn-wse-outline btn-sm w-100 mb-2">
-                            <i class="bi bi-info-circle me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
+                    <div>
+                        <div class="fs-4 fw-bold text-forest-green mb-3">$25 <span class="fs-6 text-muted fw-normal">/ hora</span></div>
+                        <a th:href="@{/levels/intermedio(lang=${targetLanguage})}" class="btn btn-sm btn-wse-outline w-100 mb-2">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Ver plan de estudios' : 'View Level Curriculum'}">Ver plan de estudios</span>
                         </a>
-                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
-                            <i class="bi bi-calendar2-check me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        <a th:href="@{/contact(lang=${targetLanguage},reason='Elegir nivel - Intermedio')}" class="btn btn-sm btn-wse-primary w-100">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Elegir Nivel' : 'Select Tier'}">Elegir Nivel</span>
                         </a>
                     </div>
                 </div>
             </div>
 
             <!-- Card 3: Avanzado (C1) -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="wse-card h-100 p-4 d-flex flex-column text-center">
-                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR C1</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
-                        th:text="${targetLanguage == 'ENGLISH' ? 'Avanzado' : 'Advanced'}">Avanzado</h3>
-
-                    <!-- Prominent Price Tag -->
-                    <div class="my-3">
-                        <span class="display-6 fw-bold text-forest-green">$25</span>
-                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
-                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+            <div class="col-md-6 col-lg-3">
+                <div class="wse-card p-4 h-100 d-flex flex-column justify-content-between bg-white border-0">
+                    <div>
+                        <span class="badge bg-light text-forest-green fw-bold mb-2">C1</span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                            th:text="${targetLanguage == 'ENGLISH' ? 'Avanzado' : 'Advanced'}">Avanzado</h3>
+                        <p class="text-muted small mb-3"
+                           th:text="${targetLanguage == 'ENGLISH' ?
+                                   'Preparación de entrevistas de trabajo, negociación ejecutiva y presentaciones complejas.' :
+                                   'Job interviews, executive negotiations, technical reports, and spontaneous speech.'}">
+                        </p>
                     </div>
-
-                    <p class="text-muted flex-grow-1 fs-6"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Fluidez espontánea, informes profesionales, matices implícitos y sintaxis avanzada.' :
-                           'Fluent spontaneous expression, professional reports, implicit nuances, and advanced syntax.'}">
-                    </p>
-                    <div class="pt-3 border-top mt-auto">
-                        <a th:href="@{/levels/avanzado(lang=${targetLanguage})}" class="btn btn-wse-outline btn-sm w-100 mb-2">
-                            <i class="bi bi-info-circle me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
+                    <div>
+                        <div class="fs-4 fw-bold text-forest-green mb-3">$25 <span class="fs-6 text-muted fw-normal">/ hora</span></div>
+                        <a th:href="@{/levels/avanzado(lang=${targetLanguage})}" class="btn btn-sm btn-wse-outline w-100 mb-2">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Ver plan de estudios' : 'View Level Curriculum'}">Ver plan de estudios</span>
                         </a>
-                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
-                            <i class="bi bi-calendar2-check me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        <a th:href="@{/contact(lang=${targetLanguage},reason='Elegir nivel - Avanzado')}" class="btn btn-sm btn-wse-primary w-100">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Elegir Nivel' : 'Select Tier'}">Elegir Nivel</span>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 4: Conversacional (C2 & Day-to-Day Topics) -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="wse-card h-100 p-4 d-flex flex-column text-center">
-                    <span class="badge bg-woodland-dark mb-2 py-2 px-3 rounded-pill align-self-center">CEFR C2 & Topics</span>
-                    <h3 class="h4 fw-bold text-woodland-dark mb-1"
-                        th:text="${targetLanguage == 'ENGLISH' ? 'Conversacional' : 'Conversational'}">Conversacional</h3>
-
-                    <!-- Prominent Price Tag -->
-                    <div class="my-3">
-                        <span class="display-6 fw-bold text-forest-green">$25</span>
-                        <span class="text-muted" th:text="${targetLanguage == 'ENGLISH' ? '/ hora' : '/ hr'}">/ hr</span>
-                        <div class="small text-muted mt-1" th:text="${targetLanguage == 'ENGLISH' ? 'Clase 1-a-1 Individual' : '1-on-1 Private Lesson'}">1-on-1 Private</div>
+            <!-- Card 4: Conversacional (C2 & Temas Reales) -->
+            <div class="col-md-6 col-lg-3">
+                <div class="wse-card p-4 h-100 d-flex flex-column justify-content-between bg-white border-0">
+                    <div>
+                        <span class="badge bg-light text-forest-green fw-bold mb-2">C2 · Day-to-Day</span>
+                        <h3 class="h5 fw-bold text-woodland-dark mb-2"
+                            th:text="${targetLanguage == 'ENGLISH' ? 'Conversacional' : 'Conversational'}">Conversacional</h3>
+                        <p class="text-muted small mb-3"
+                           th:text="${targetLanguage == 'ENGLISH' ?
+                                   'Modismos, jerga cotidiana, noticias actuales y soltura natural sin esfuerzo.' :
+                                   'Colloquial expressions, idioms, cultural nuances, and effortless native-like dialogue.'}">
+                        </p>
                     </div>
-
-                    <p class="text-muted flex-grow-1 fs-6"
-                       th:text="${targetLanguage == 'ENGLISH' ?
-                           'Dominio natural, modismos, frases hechas, análisis de actualidad y debates culturales.' :
-                           'Native-like ease, idioms, colloquial nuances, news analysis, and real-world cultural topics.'}">
-                    </p>
-                    <div class="pt-3 border-top mt-auto">
-                        <a th:href="@{/levels/conversacional(lang=${targetLanguage})}" class="btn btn-wse-outline btn-sm w-100 mb-2">
-                            <i class="bi bi-info-circle me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Saber más del nivel' : 'Learn more about the level'}">Learn More</span>
+                    <div>
+                        <div class="fs-4 fw-bold text-forest-green mb-3">$25 <span class="fs-6 text-muted fw-normal">/ hora</span></div>
+                        <a th:href="@{/levels/conversacional(lang=${targetLanguage})}" class="btn btn-sm btn-wse-outline w-100 mb-2">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Ver plan de estudios' : 'View Level Curriculum'}">Ver plan de estudios</span>
                         </a>
-                        <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary btn-sm w-100">
-                            <i class="bi bi-calendar2-check me-1"></i>
-                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Clase' : 'Book Session'}">Book Session</span>
+                        <a th:href="@{/contact(lang=${targetLanguage},reason='Elegir nivel - Conversacional')}" class="btn btn-sm btn-wse-primary w-100">
+                            <span th:text="${targetLanguage == 'ENGLISH' ? 'Elegir Nivel' : 'Select Tier'}">Elegir Nivel</span>
                         </a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <!-- GROUP CLASSES CALLOUT SECTION -->
-    <div class="container py-4">
+</section>
+
+<!-- ======================================================== -->
+<!-- 5. GROUP CLASSES CALLOUT SECTION (Restored)              -->
+<!-- ======================================================== -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container px-3">
         <div class="wse-card p-4 p-md-5 bg-white border border-2 border-success-subtle shadow-sm">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8">
                     <div class="d-flex align-items-center gap-2 mb-2">
-                    <span class="badge bg-forest-green px-3 py-2 rounded-pill text-white fw-bold">
-                        <i class="bi bi-people-fill me-1"></i>
-                        <span th:text="${targetLanguage == 'ENGLISH' ? '¡Opción Económica!' : 'Budget-Friendly Option!'}">Budget Friendly</span>
-                    </span>
+                            <span class="badge bg-forest-green px-3 py-2 rounded-pill text-white fw-bold">
+                                <i class="bi bi-people-fill me-1"></i>
+                                <span th:text="${targetLanguage == 'ENGLISH' ? '¡Opción Económica!' : 'Budget-Friendly Option!'}">¡Opción Económica!</span>
+                            </span>
                         <span class="text-forest-green fw-bold small"
-                              th:text="${targetLanguage == 'ENGLISH' ? 'Grupos de 3 a 5 estudiantes' : 'Small groups of 3-5 students'}">
-                        3-5 students
-                    </span>
+                              th:text="${targetLanguage == 'ENGLISH' ? 'Grupos reducidos de 3 a 5 estudiantes' : 'Small groups of 3-5 students'}">
+                                Grupos reducidos de 3 a 5 estudiantes
+                            </span>
                     </div>
                     <h3 class="h3 fw-bold text-woodland-dark mb-2"
-                        th:text="${targetLanguage == 'ENGLISH' ? '¿Prefieres aprender en grupo? Clases Semanales Reducidas' : 'Prefer learning with others? Small Group Workshops'}">
-                        Small Group Classes
+                        th:text="${targetLanguage == 'ENGLISH' ? '¿Prefieres aprender en grupo? Talleres Semanales Reducidos' : 'Prefer learning with others? Small Group Workshops'}">
+                        ¿Prefieres aprender en grupo?
                     </h3>
                     <p class="text-muted mb-0"
                        th:text="${targetLanguage == 'ENGLISH' ?
-                       'Aprende junto a compañeros de tu mismo nivel a un precio más accesible. Practicamos dinámicas conversacionales dinámicas, debates y tareas grupales auténticas.' :
-                       'Learn alongside peers at your exact level at a reduced rate. Enjoy interactive speaking dynamics, debates, and collaborative communication tasks.'}">
+                               'Aprende junto a compañeros de tu mismo nivel a un precio más accesible. Practicamos dinámicas conversacionales interactivas, debates y tareas grupales auténticas.' :
+                               'Learn alongside peers at your exact level at a reduced rate. Enjoy interactive speaking dynamics, debates, and collaborative communication tasks.'}">
                     </p>
                 </div>
 
                 <div class="col-lg-4 text-lg-end text-center">
                     <div class="mb-3">
-                        <span class="display-5 fw-extrabold text-forest-green">$15</span>
-                        <span class="text-muted fs-6" th:text="${targetLanguage == 'ENGLISH' ? '/ hora por alumno' : '/ hr per student'}">/ hr per student</span>
-                        <div class="small text-muted" th:text="${targetLanguage == 'ENGLISH' ? 'Ahorras un 40% vs. clases privadas' : 'Save 40% vs. 1-on-1 private lessons'}">Save 40%</div>
+                        <span class="display-5 fw-bold text-forest-green">$15</span>
+                        <span class="text-muted fs-6" th:text="${targetLanguage == 'ENGLISH' ? '/ hora por alumno' : '/ hr per student'}">/ hora por alumno</span>
+                        <div class="small text-muted" th:text="${targetLanguage == 'ENGLISH' ? 'Ahorras un 40% vs. clases privadas' : 'Save 40% vs. 1-on-1 private lessons'}">Ahorras un 40% vs. privadas</div>
                     </div>
-                    <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary px-4 py-2 shadow-sm w-100 w-lg-auto">
+                    <a th:href="@{/contact(lang=${targetLanguage},reason='Consultar disponibilidad grupo')}" class="btn btn-wse-primary px-4 py-2 shadow-sm w-100 w-lg-auto">
                         <i class="bi bi-chat-dots-fill me-2"></i>
-                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Consultar Disponibilidad de Grupo' : 'Inquire About Group Spots'}">Inquire Group</span>
+                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Consultar Disponibilidad de Grupo' : 'Inquire About Group Spots'}">Consultar Grupo</span>
                     </a>
                 </div>
             </div>
@@ -346,24 +385,47 @@
     </div>
 </section>
 
-
-<!-- 5. CONTACT & INQUIRY FORM SECTION -->
-<section id="contact" class="py-5 wse-section-bg">
+<!-- ======================================================== -->
+<!-- 6. NEW INVITATION CARD (Replaces "Contactar con Alberto") -->
+<!-- ======================================================== -->
+<section class="py-5 wse-section-bg text-center">
     <div class="container px-3">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="wse-card p-4 p-md-5">
-                    <h2 class="fw-bold text-center mb-3" th:text="${targetLanguage == 'ENGLISH' ? 'Contacto y Disponibilidad' : 'Contact for Availability'}">Contact</h2>
-                    <p class="text-center text-muted mb-4" th:text="${targetLanguage == 'ENGLISH' ? 'Consulta horarios disponibles o solicita un plan personalizado.' : 'Inquire about schedule availability or customized lesson plans.'}">Subtitle</p>
+        <div class="wse-card bg-white p-4 p-md-5 shadow-sm border-0 mx-auto" style="max-width: 720px;">
+                <span class="wse-badge mb-3 d-inline-block"
+                      th:text="${targetLanguage == 'ENGLISH' ? 'Comienza Hoy' : 'Start Today'}">
+                    Comienza Hoy
+                </span>
+            <h2 class="display-6 fw-bold text-woodland-dark mb-3"
+                th:text="${targetLanguage == 'ENGLISH' ? '¿Hablamos sobre tus metas?' : 'Ready to Start Speaking?'}">
+                ¿Hablamos sobre tus metas?
+            </h2>
+            <p class="text-muted fs-6 mb-4 mx-auto" style="max-width: 550px;"
+               th:text="${targetLanguage == 'ENGLISH' ?
+                       'Cuéntame qué necesitas conseguir (entrevistas, soltura o viajes) y diseñamos un plan a tu medida sin ningún compromiso.' :
+                       'Tell me about your goals (work readiness, travel fluency, or everyday confidence) and we will craft a plan tailored around you.'}">
+            </p>
 
-                    <a th:href="@{/contact(lang=${targetLanguage})}" class="btn btn-wse-primary w-100 shadow-sm text-center">
-                        <span th:text="${targetLanguage == 'ENGLISH' ? 'Ir al Formulario de Contacto' : 'Open Inquiry Form'}">Open Inquiry Form</span>
-                    </a>
-                </div>
+            <!-- Value checkmarks -->
+            <div class="d-flex justify-content-center flex-wrap gap-4 text-muted small mb-4">
+                <span><i class="bi bi-check-circle-fill text-forest-green me-1"></i>Diagnóstico de nivel inicial</span>
+                <span><i class="bi bi-check-circle-fill text-forest-green me-1"></i>Sin contratos ni permanencias</span>
+                <span><i class="bi bi-check-circle-fill text-forest-green me-1"></i>Respuesta en menos de 24h</span>
             </div>
+
+            <a th:href="@{/contact(lang=${targetLanguage},reason='Reserva de clases')}" class="btn btn-wse-primary px-5 py-3 fs-5 shadow-sm">
+                <span th:text="${targetLanguage == 'ENGLISH' ? 'Reservar Primera Sesión' : 'Book Your First Session'}">Reservar Primera Sesión</span>
+                <i class="bi bi-calendar2-check-fill ms-2"></i>
+            </a>
         </div>
     </div>
 </section>
+
+<!-- Footer -->
+<footer class="py-4 bg-white border-top text-center text-muted small">
+    <div class="container">
+        <p class="mb-0">© 2026 Alberto Sánchez · Language Coaching</p>
+    </div>
+</footer>
 
 </body>
 </html>

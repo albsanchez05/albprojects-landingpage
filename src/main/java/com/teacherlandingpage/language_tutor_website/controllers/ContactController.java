@@ -19,22 +19,29 @@ public class ContactController {
     }
 
     @GetMapping("/contact")
-    public String showContactForm(@RequestParam(name = "lang", required = false, defaultValue = "ENGLISH") String lang, Model model) {
-        // Normalize language parameter safely
+    public String showContactForm(
+            @RequestParam(name = "lang", required = false, defaultValue = "ENGLISH") String lang,
+            @RequestParam(name = "reason", required = false, defaultValue = "Contactar") String reason,
+            Model model
+    ) {
+        // Safe normalization of the lang parameter
         String targetLang = (lang != null && lang.equalsIgnoreCase("SPANISH")) ? "SPANISH" : "ENGLISH";
         boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase(targetLang);
 
+        // If the model doesn't already contain a ContactInquiry, create a new one
         if (!model.containsAttribute("inquiry")) {
             ContactInquiry inquiry = new ContactInquiry();
             inquiry.setTargetLanguage(targetLang);
+            inquiry.setInquiryReason(reason != null ? reason : "Contactar");
             model.addAttribute("inquiry", inquiry);
         }
 
-        // Add both targetLanguage and isEnglishCourse so all HTML template checks work
+        // Language and navigation attributes
         model.addAttribute("targetLanguage", targetLang);
         model.addAttribute("isEnglishCourse", isEnglishCourse);
+        model.addAttribute("selectedReason", reason);
 
-        // Localized UI Labels based on target course language
+        // Localized navigation text based on the target language
         model.addAttribute("navBack", isEnglishCourse ? "← Volver a Ver Clases" : "← Back to Lessons");
         model.addAttribute("formTitle", isEnglishCourse ? "Contacto y Disponibilidad de Clases" : "Contact & Lesson Availability");
         model.addAttribute("formSubtitle", isEnglishCourse ?
@@ -62,14 +69,21 @@ public class ContactController {
             RedirectAttributes redirectAttributes,
             Model model
     ) {
-        // Fallback to ENGLISH if targetLanguage is null
+        // Fallback to English if the target language is not set or invalid
         String targetLang = (inquiry.getTargetLanguage() != null && inquiry.getTargetLanguage().equalsIgnoreCase("SPANISH")) ? "SPANISH" : "ENGLISH";
         inquiry.setTargetLanguage(targetLang);
 
-        if (bindingResult.hasErrors()) {
-            return showContactForm(targetLang, model);
+        // If the reason is not set, default to "Contactar"
+        if (inquiry.getInquiryReason() == null || inquiry.getInquiryReason().isBlank()) {
+            inquiry.setInquiryReason("Contactar");
         }
 
+        // If there are validation errors, redirect back to the form with error messages
+        if (bindingResult.hasErrors()) {
+            return showContactForm(targetLang, inquiry.getInquiryReason(), model);
+        }
+
+        // Save the inquiry to the database
         contactInquiryRepository.save(inquiry);
 
         boolean isEnglishCourse = "ENGLISH".equalsIgnoreCase(targetLang);

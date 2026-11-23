@@ -47,6 +47,10 @@ public class ContactInquiry
     @Column(length = 2000)
     private String message;
 
+    // Which button the user clicked
+    @Column(name = "inquiry_reason")
+    private String inquiryReason;
+
     @Column( nullable = false, updatable = false )
     private LocalDateTime createAt;
 

@@ -14,10 +14,10 @@
 /* Base Document Reset & Typography */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: var(--wse-woodland-dark);
+    color: var(--wse-woodland-dark, #2F4F4F);
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: var(--wse-light-bg, #F4F9F5) !important;
 }
 
 /* Color Utilities */
@@ -41,6 +41,11 @@ body {
 
 .wse-section-bg {
     background-color: var(--wse-light-bg) !important;
+}
+
+.wse-hero-banner {
+    background-color: #2D6A4F !important;
+    color: #FFFFFF !important;
 }
 
 /* ==========================================================================
