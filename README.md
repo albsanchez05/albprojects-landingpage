@@ -40,6 +40,23 @@ docker-compose up --build -d
 docker-compose down -v
 ```
 
+## Local Development Without Docker
+
+Install Java 17 and PostgreSQL, then create a database named `languagedb`.
+From the project root, configure the database and admin credentials for the
+current PowerShell session:
+
+```powershell
+$env:SPRING_DATASOURCE_PASSWORD = "your-postgres-password"
+$env:APP_ADMIN_USERNAME = "admin"
+$env:APP_ADMIN_PASSWORD = "use-a-strong-local-password"
+.\mvnw.cmd spring-boot:run
+```
+
+The public site is available at `http://localhost:8080`. The protected admin
+dashboard is available at `http://localhost:8080/admin/inquiries` and requires
+the configured admin credentials.
+
 ## Endpoint Summary
 
 - GET / : Root portal with language selection

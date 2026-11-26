@@ -17,6 +17,12 @@ public class AdminController
         this.contactInquiryRepository = contactInquiryRepository;
     }
 
+    @GetMapping("/login")
+    public String login()
+    {
+        return "admin-login";
+    }
+
     @GetMapping("/inquiries")
     public String viewInquiries( Model model )
     {

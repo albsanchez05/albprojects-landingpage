@@ -13,12 +13,17 @@
 <body class="wse-section-bg">
 
 <!-- Admin Navbar -->
-<nav class="navbar wse-navbar shadow-sm">
+<nav class="navbar navbar-dark wse-navbar-dark shadow-sm">
     <div class="container">
         <a class="navbar-brand text-white fw-bold" href="/admin/inquiries">
             <i class="bi bi-shield-lock-fill me-2"></i>Tutor Admin Panel
         </a>
-        <a href="/" class="btn btn-outline-light btn-sm rounded-pill px-3">View Public Site</a>
+        <div class="d-flex align-items-center gap-2">
+            <a href="/" class="btn btn-outline-light btn-sm rounded-pill px-3">View Public Site</a>
+            <form th:action="@{/logout}" method="post" class="m-0">
+                <button type="submit" class="btn btn-outline-light btn-sm rounded-pill px-3">Sign out</button>
+            </form>
+        </div>
     </div>
 </nav>
 

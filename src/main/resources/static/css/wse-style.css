@@ -34,6 +34,16 @@ body {
     color: var(--wse-white) !important;
 }
 
+.wse-navbar-dark {
+    background-color: var(--wse-woodland-dark) !important;
+    color: var(--wse-white) !important;
+}
+
+.wse-navbar-dark .navbar-brand,
+.wse-navbar-dark .nav-link {
+    color: var(--wse-white) !important;
+}
+
 .bg-forest-green {
     background-color: var(--wse-forest-green) !important;
     color: var(--wse-white) !important;
